@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@300;400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#ede4d3}a{color:inherit;text-decoration:none}a:hover{opacity:.7}
+.vsp-frame{overflow:hidden;position:relative}
+@keyframes vspSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.vsp-divider{display:inline-block;animation:vspSpin 46s linear infinite;transform-origin:center}
+@media (hover:hover) and (pointer:fine){
+  .vsp-link{position:relative;display:inline-block;padding-bottom:3px;cursor:pointer}
+  .vsp-link::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.22,.61,.36,1)}
+  .vsp-link:hover::after{transform:scaleX(1)}
+
+  .vsp-cart-link{position:relative;cursor:pointer}
+  .vsp-cart-link::before{content:"";position:absolute;left:0;bottom:-5px;width:100%;height:1px;background:#8a5a34;transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+  .vsp-cart-link:hover::before{transform:scaleX(1)}
+
+  .vsp-card{position:relative;transition:transform .55s cubic-bezier(.22,.61,.36,1)}
+  .vsp-card:hover{transform:translateY(-6px)}
+  .vsp-card::after{content:"";position:absolute;inset:7px;border:1px solid #8a5a34;opacity:0;transition:opacity .5s ease,inset .55s cubic-bezier(.22,.61,.36,1);pointer-events:none}
+  .vsp-card:hover::after{opacity:1;inset:10px}
+
+  .vsp-frame .vsp-photo{transition:transform .8s cubic-bezier(.22,.61,.36,1),filter .8s ease}
+  .vsp-frame:hover .vsp-photo{transform:scale(1.03);filter:sepia(.1) saturate(.9) !important}
+
+  .vsp-caption{position:relative;display:inline-block;padding-bottom:2px;cursor:pointer}
+  .vsp-caption::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:#8a5a34;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.22,.61,.36,1)}
+  .vsp-caption:hover::after{transform:scaleX(1)}
+
+  .vsp-btn{transition:letter-spacing .4s ease,box-shadow .4s ease;cursor:pointer}
+  .vsp-btn:hover{letter-spacing:.3em !important;box-shadow:0 10px 26px -18px rgba(44,32,22,.45)}
+
+  .vsp-divider:hover{animation-play-state:paused;transform:scale(1.2);transition:transform .4s ease}
+}
+@media (prefers-reduced-motion: reduce){
+  .vsp-link::after,.vsp-cart-link::before,.vsp-card,.vsp-card::after,.vsp-frame .vsp-photo,.vsp-caption::after,.vsp-btn,.vsp-divider{transition:none !important;animation:none !important}
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+</helmet>
+
+<div data-screen-label="VESPER" style="background:#ede4d3;color:#2c2016;font-family:'Libre Franklin',sans-serif;font-weight:300;min-height:100vh">
+
+  <a href="Index.dc.html" style="display:block;background:#2c2016;color:#ede4d3;text-align:center;padding:9px;font-size:11px;letter-spacing:.26em;text-transform:uppercase">← Back to all directions</a>
+
+  <!-- ticker -->
+  <div style="background:#8a5a34;color:#ede4d3;text-align:center;padding:9px;font-size:11px;letter-spacing:.26em;text-transform:uppercase">Roasted Tuesdays &amp; Fridays — free shipping over ₹1,500</div>
+
+  <!-- nav -->
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:clamp(18px,3vw,26px) clamp(20px,5vw,60px);border-bottom:2px solid #2c2016">
+    <div style="display:flex;gap:clamp(20px,3vw,36px);font-size:12px;letter-spacing:.16em;text-transform:uppercase;flex-wrap:wrap">
+      <span class="vsp-link">Coffee</span><span class="vsp-link">Wares</span><span class="vsp-link">Almanac</span>
+    </div>
+    <div style="font-family:'Libre Caslon Text',serif;font-size:clamp(20px,3vw,26px);letter-spacing:.08em">VESPER<span style="font-size:13px;vertical-align:super;letter-spacing:.2em">&nbsp;CO.</span></div>
+    <div style="display:flex;gap:clamp(20px,3vw,36px);font-size:12px;letter-spacing:.16em;text-transform:uppercase">
+      <span class="vsp-link">Subscribe</span><span class="vsp-link">Cart (0)</span>
+    </div>
+  </div>
+
+  <!-- hero: framed label -->
+  <div style="padding:clamp(32px,5vw,64px) clamp(20px,5vw,60px) clamp(40px,6vw,72px);display:flex;justify-content:center">
+    <div style="border:1px solid #2c2016;outline:1px solid #2c2016;outline-offset:5px;padding:clamp(36px,6vw,72px) clamp(24px,7vw,90px);display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center;max-width:860px;background:#f2ebdd">
+      <svg class="vsp-parallax" data-depth="0.015" width="104" height="71" viewBox="0 0 88 60" fill="none" stroke="#2c2016" stroke-width="1.4">
+        <ellipse cx="30" cy="34" rx="12" ry="18" transform="rotate(-16 30 34)"></ellipse>
+        <path d="M26 19 C 33 27, 25 41, 34 49"></path>
+        <ellipse cx="58" cy="34" rx="12" ry="18" transform="rotate(16 58 34)"></ellipse>
+        <path d="M62 19 C 55 27, 63 41, 54 49"></path>
+        <path d="M44 12 C 40 8, 46 5, 44 1" stroke="#8a5a34"></path>
+      </svg>
+      <div style="font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#8a5a34">Est. MMXXVI · Small-batch roastery</div>
+      <div style="font-family:'Libre Caslon Text',serif;font-size:clamp(32px,5vw,58px);line-height:1.12;font-weight:400;text-wrap:balance">Coffee of uncommon provenance, roasted with obstinate care.</div>
+      <div style="display:flex;align-items:center;gap:14px;color:#8a5a34"><span style="width:60px;height:1px;background:#8a5a34;display:block"></span><span class="vsp-divider" style="font-size:16px">✳</span><span style="width:60px;height:1px;background:#8a5a34;display:block"></span></div>
+      <div style="font-size:14.5px;line-height:1.8;max-width:520px;color:#5a4a38">Nine farms. Two roast days a week. One 1962 drum roaster we refuse to replace. Every lot cupped at 8.6 or above — or it never leaves the roastery.</div>
+      <span class="vsp-btn" style="padding:16px 44px;background:#2c2016;color:#ede4d3;font-size:12px;letter-spacing:.22em;text-transform:uppercase;margin-top:8px;cursor:pointer">Browse the coffees</span>
+    </div>
+  </div>
+
+  <!-- current lots -->
+  <div style="padding:0 clamp(20px,5vw,60px) clamp(48px,7vw,80px);display:flex;flex-direction:column;gap:36px">
+    <div style="display:flex;align-items:center;gap:20px;justify-content:center">
+      <span style="height:1px;background:#c4b49a;flex:1"></span>
+      <span style="font-family:'Libre Caslon Text',serif;font-size:clamp(24px,3vw,30px);font-style:italic;white-space:nowrap">The current lots</span>
+      <span style="height:1px;background:#c4b49a;flex:1"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px">
+      <div class="vsp-card" style="border:1px solid #2c2016;background:#f2ebdd;padding:34px 30px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
+        <div style="font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:#8a5a34">Lot No. 41 — Washed</div>
+        <div style="font-family:'Libre Caslon Text',serif;font-size:24px">Gedeb, Ethiopia</div>
+        <div style="width:44px;height:1px;background:#8a5a34"></div>
+        <div style="font-size:12.5px;line-height:1.9;color:#5a4a38">Heirloom varietals · 2,100 m<br>Cupping score 8.9<br><span style="font-style:italic;font-family:'Libre Caslon Text',serif">peach, honeysuckle, black tea</span></div>
+        <div style="font-size:15px;font-family:'Libre Caslon Text',serif;margin-top:auto">₹690 — 250 g</div>
+        <span class="vsp-cart-link" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;border-bottom:1px solid #2c2016;padding-bottom:3px;cursor:pointer">Add to cart</span>
+      </div>
+      <div class="vsp-card" style="border:1px solid #2c2016;background:#f2ebdd;padding:34px 30px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;position:relative">
+        <div style="position:absolute;top:-12px;background:#8a5a34;color:#ede4d3;font-size:10px;letter-spacing:.26em;text-transform:uppercase;padding:5px 14px">Roaster's pick</div>
+        <div style="font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:#8a5a34">Lot No. 38 — Natural</div>
+        <div style="font-family:'Libre Caslon Text',serif;font-size:24px">Carmo de Minas, Brazil</div>
+        <div style="width:44px;height:1px;background:#8a5a34"></div>
+        <div style="font-size:12.5px;line-height:1.9;color:#5a4a38">Yellow Bourbon · 1,150 m<br>Cupping score 8.7<br><span style="font-style:italic;font-family:'Libre Caslon Text',serif">hazelnut, dried fig, molasses</span></div>
+        <div style="font-size:15px;font-family:'Libre Caslon Text',serif;margin-top:auto">₹590 — 250 g</div>
+        <span class="vsp-cart-link" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;border-bottom:1px solid #2c2016;padding-bottom:3px;cursor:pointer">Add to cart</span>
+      </div>
+      <div class="vsp-card" style="border:1px solid #2c2016;background:#f2ebdd;padding:34px 30px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
+        <div style="font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:#8a5a34">Lot No. 43 — Anaerobic</div>
+        <div style="font-family:'Libre Caslon Text',serif;font-size:24px">Tarrazú, Costa Rica</div>
+        <div style="width:44px;height:1px;background:#8a5a34"></div>
+        <div style="font-size:12.5px;line-height:1.9;color:#5a4a38">Caturra · 1,900 m<br>Cupping score 8.8<br><span style="font-style:italic;font-family:'Libre Caslon Text',serif">red apple, cinnamon, cacao</span></div>
+        <div style="font-size:15px;font-family:'Libre Caslon Text',serif;margin-top:auto">₹790 — 250 g</div>
+        <span class="vsp-cart-link" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;border-bottom:1px solid #2c2016;padding-bottom:3px;cursor:pointer">Add to cart</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- story band -->
+  <div style="background:#2c2016;color:#ede4d3;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+    <div class="vsp-frame vsp-parallax" data-depth="0.03" style="min-height:320px;max-height:560px">
+      <img class="vsp-photo" src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1000&q=80" alt="Roasted coffee beans" style="width:100%;height:100%;min-height:320px;max-height:560px;object-fit:cover;display:block;filter:sepia(.35) saturate(.75)">
+    </div>
+    <div style="padding:clamp(44px,6vw,80px) clamp(24px,5vw,72px);display:flex;flex-direction:column;justify-content:center;gap:26px">
+      <div style="font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#c9a878">The craft</div>
+      <div style="font-family:'Libre Caslon Text',serif;font-size:clamp(28px,4vw,40px);line-height:1.2">We log every roast<br>to the second.</div>
+      <div style="font-size:14px;line-height:1.9;color:#cbbba2;max-width:420px">Charge temperature, turning point, rate of rise, first crack, drop. Sixty-one data points per batch, kept in a ledger since roast one. Obsessive? Certainly. That is rather the point.</div>
+      <div style="display:flex;gap:clamp(28px,4vw,48px);margin-top:8px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Libre Caslon Text',serif;font-size:30px">61</span><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#c9a878">Data points / batch</span></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Libre Caslon Text',serif;font-size:30px">8.6+</span><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#c9a878">Minimum cup score</span></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Libre Caslon Text',serif;font-size:30px">9</span><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#c9a878">Partner farms</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- wares -->
+  <div style="padding:clamp(48px,7vw,80px) clamp(20px,5vw,60px);display:flex;flex-direction:column;gap:36px">
+    <div style="display:flex;align-items:center;gap:20px;justify-content:center">
+      <span style="height:1px;background:#c4b49a;flex:1"></span>
+      <span style="font-family:'Libre Caslon Text',serif;font-size:clamp(24px,3vw,30px);font-style:italic;white-space:nowrap">Wares for the table</span>
+      <span style="height:1px;background:#c4b49a;flex:1"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px">
+      <div style="display:flex;flex-direction:column;gap:12px;text-align:center">
+        <div class="vsp-frame vsp-parallax" data-depth="0.022" style="border:1px solid #c4b49a;padding:10px"><img class="vsp-photo" src="https://images.unsplash.com/photo-1524350876685-274059332603?auto=format&fit=crop&w=600&q=80" alt="Kettle" style="width:100%;height:220px;object-fit:cover;display:block;filter:sepia(.25) saturate(.8)"></div>
+        <div class="vsp-caption" style="font-family:'Libre Caslon Text',serif;font-size:16px;align-self:center">Brass-handled kettle</div>
+        <div style="font-size:12.5px;color:#8a5a34">₹4,200</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;text-align:center">
+        <div class="vsp-frame vsp-parallax" data-depth="0.018" style="border:1px solid #c4b49a;padding:10px"><img class="vsp-photo" src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=600&q=80" alt="Pour over" style="width:100%;height:220px;object-fit:cover;display:block;filter:sepia(.25) saturate(.8)"></div>
+        <div class="vsp-caption" style="font-family:'Libre Caslon Text',serif;font-size:16px;align-self:center">Glass brewer, 2-cup</div>
+        <div style="font-size:12.5px;color:#8a5a34">₹2,400</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;text-align:center">
+        <div class="vsp-frame vsp-parallax" data-depth="0.024" style="border:1px solid #c4b49a;padding:10px"><img class="vsp-photo" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" alt="Cup" style="width:100%;height:220px;object-fit:cover;display:block;filter:sepia(.25) saturate(.8)"></div>
+        <div class="vsp-caption" style="font-family:'Libre Caslon Text',serif;font-size:16px;align-self:center">Café cup &amp; saucer</div>
+        <div style="font-size:12.5px;color:#8a5a34">₹1,800</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;text-align:center">
+        <div class="vsp-frame vsp-parallax" data-depth="0.02" style="border:1px solid #c4b49a;padding:10px"><img class="vsp-photo" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Coffee" style="width:100%;height:220px;object-fit:cover;display:block;filter:sepia(.25) saturate(.8)"></div>
+        <div class="vsp-caption" style="font-family:'Libre Caslon Text',serif;font-size:16px;align-self:center">Tasting flight, gift box</div>
+        <div style="font-size:12.5px;color:#8a5a34">₹2,900</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- subscription + almanac -->
+  <div style="padding:0 clamp(20px,5vw,60px) clamp(48px,7vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px">
+    <div style="border:1px solid #2c2016;outline:1px solid #2c2016;outline-offset:4px;background:#f2ebdd;padding:clamp(32px,5vw,56px);display:flex;flex-direction:column;gap:18px">
+      <div style="font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#8a5a34">The standing order</div>
+      <div style="font-family:'Libre Caslon Text',serif;font-size:clamp(26px,3.5vw,34px);line-height:1.2">Fresh coffee, delivered like clockwork.</div>
+      <div style="font-size:13.5px;line-height:1.8;color:#5a4a38">Choose your rhythm — weekly, fortnightly, monthly. We roast to order and ship the same afternoon. Members receive the Almanac and first claim on micro-lots.</div>
+      <span class="vsp-btn" style="padding:15px 36px;background:#2c2016;color:#ede4d3;font-size:12px;letter-spacing:.22em;text-transform:uppercase;align-self:flex-start;margin-top:6px;cursor:pointer">Begin — from ₹1,500</span>
+    </div>
+    <div style="display:flex;flex-direction:column;border-top:2px solid #2c2016">
+      <div style="font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#8a5a34;padding:20px 0 6px">From the Almanac</div>
+      <div style="border-bottom:1px solid #c4b49a;padding:16px 0;display:flex;flex-direction:column;gap:4px"><span class="vsp-link" style="font-family:'Libre Caslon Text',serif;font-size:18px">On resting: why day seven matters</span><span style="font-size:11.5px;color:#8a5a34;letter-spacing:.14em;text-transform:uppercase">Vol. II · No. 6</span></div>
+      <div style="border-bottom:1px solid #c4b49a;padding:16px 0;display:flex;flex-direction:column;gap:4px"><span class="vsp-link" style="font-family:'Libre Caslon Text',serif;font-size:18px">A ledger of sixty-one numbers</span><span style="font-size:11.5px;color:#8a5a34;letter-spacing:.14em;text-transform:uppercase">Vol. II · No. 5</span></div>
+      <div style="border-bottom:1px solid #c4b49a;padding:16px 0;display:flex;flex-direction:column;gap:4px"><span class="vsp-link" style="font-family:'Libre Caslon Text',serif;font-size:18px">Harvest notes from Tarrazú</span><span style="font-size:11.5px;color:#8a5a34;letter-spacing:.14em;text-transform:uppercase">Vol. II · No. 4</span></div>
+    </div>
+  </div>
+
+  <!-- press -->
+  <div style="border-top:1px solid #c4b49a;border-bottom:1px solid #c4b49a;margin:0 clamp(20px,5vw,60px);padding:28px 0;display:flex;justify-content:center;gap:clamp(24px,4vw,56px);font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:#8a5a34;flex-wrap:wrap">
+    <span>Monocle</span><span>Financial Times</span><span>Kinfolk</span><span>Standart</span><span>Sprudge</span>
+  </div>
+
+  <!-- footer -->
+  <div style="padding:clamp(28px,4vw,44px) clamp(20px,5vw,60px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#8a5a34">
+    <span style="font-family:'Libre Caslon Text',serif;font-size:18px;color:#2c2016;letter-spacing:.08em">VESPER CO.</span>
+    <span>Shipping · Wholesale · Visit the roastery</span>
+    <span>© MMXXVI</span>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const start = () => {
+      if (!window.anime) { setTimeout(start, 120); return; }
+      const anime = window.anime;
+      const root = document.querySelector('[data-screen-label]');
+      if (!root || root.dataset.animated) return;
+      root.dataset.animated = '1';
+      const hero = root.querySelector('svg');
+      if (hero) {
+        hero.querySelectorAll('path,circle,ellipse,line').forEach((el, i) => {
+          try {
+            const l = el.getTotalLength();
+            if (!l) return;
+            el.style.strokeDasharray = l;
+            el.style.strokeDashoffset = l;
+            anime({ targets: el, strokeDashoffset: [l, 0], duration: 1500, delay: 300 + i * 180, easing: 'easeInOutSine' });
+          } catch (e) {}
+        });
+      }
+
+      // --- micro-interactions: desktop-only mouse+scroll parallax, magnetic buttons ---
+      const fine = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+      if (fine) {
+        const parallaxEls = Array.from(root.querySelectorAll('.vsp-parallax[data-depth]'));
+        if (parallaxEls.length) {
+          let mx = 0, my = 0, ticking = false;
+          const applyParallax = () => {
+            ticking = false;
+            parallaxEls.forEach((el) => {
+              const depth = parseFloat(el.getAttribute('data-depth')) || 0.02;
+              const r = el.getBoundingClientRect();
+              const centerOffset = (r.top + r.height / 2) - window.innerHeight / 2;
+              const scrollDy = Math.max(-14, Math.min(14, -centerOffset * depth * 0.5));
+              const mouseDx = mx * depth * 220;
+              const mouseDy = my * depth * 220;
+              el.style.transform = 'translate(' + mouseDx.toFixed(2) + 'px,' + (mouseDy + scrollDy).toFixed(2) + 'px)';
+            });
+          };
+          const onMove = (e) => {
+            mx = (e.clientX / window.innerWidth) - 0.5;
+            my = (e.clientY / window.innerHeight) - 0.5;
+            if (!ticking) { ticking = true; window.requestAnimationFrame(applyParallax); }
+          };
+          const onScrollParallax = () => { if (!ticking) { ticking = true; window.requestAnimationFrame(applyParallax); } };
+          window.addEventListener('mousemove', onMove, { passive: true });
+          window.addEventListener('scroll', onScrollParallax, { passive: true });
+          applyParallax();
+        }
+
+        root.querySelectorAll('.vsp-btn').forEach((btn) => {
+          btn.addEventListener('mousemove', (e) => {
+            const r = btn.getBoundingClientRect();
+            const relX = e.clientX - (r.left + r.width / 2);
+            const relY = e.clientY - (r.top + r.height / 2);
+            const mag = 0.12;
+            const tx = Math.max(-6, Math.min(6, relX * mag));
+            const ty = Math.max(-6, Math.min(6, relY * mag));
+            btn.style.transform = 'translateX(' + tx.toFixed(2) + 'px) translateY(' + ty.toFixed(2) + 'px)';
+          }, { passive: true });
+          btn.addEventListener('mouseleave', () => {
+            anime({ targets: btn, translateX: 0, translateY: 0, duration: 460, easing: 'easeOutCubic' });
+          });
+        });
+      }
+
+      const pending = [];
+      Array.from(root.children).forEach((el) => {
+        if (el.tagName === 'SCRIPT' || el.tagName === 'A') return;
+        if (el.getBoundingClientRect().top < window.innerHeight * 1.1) return;
+        el.style.opacity = 0;
+        pending.push(el);
+      });
+      const check = () => {
+        for (let i = pending.length - 1; i >= 0; i--) {
+          const el = pending[i];
+          if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
+            pending.splice(i, 1);
+            anime({ targets: el, opacity: [0, 1], translateY: [16, 0], duration: 900, easing: 'easeOutCubic' });
+          }
+        }
+        if (!pending.length) {
+          window.removeEventListener('scroll', onScroll, true);
+          clearInterval(this._pollId);
+        }
+      };
+      const onScroll = () => window.requestAnimationFrame(check);
+      window.addEventListener('scroll', onScroll, { passive: true, capture: true });
+      this._pollId = setInterval(check, 700);
+      check();
+    };
+    start();
+  }
+}
+</script>
+</body>
+</html>

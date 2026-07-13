@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Karla:wght@300;400;500&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@300;400;500&family=Archivo:wght@300;400;500;600&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#f0eee9;font-family:system-ui,sans-serif}a{color:inherit}a:hover{opacity:.75}.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}.dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}.dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)}.dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}.dv-opt:target .dv-oid{background:#2a78d6;color:#fff}.dv-next{margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)}</style>
+</helmet>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Three landing page directions — desktop views (responsive build follows once you pick)</span></div>
+<div class="dv-opts">
+
+<!-- ============ OPTION 1A — KANSO (Japandi calm, fine line-art) ============ -->
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>KANSO — Japandi calm · fine line-art · serif + sans · airy editorial</div>
+<div class="dv-card" style="width:1280px">
+<div data-screen-label="1a KANSO" style="background:#f7f5f0;color:#292521;font-family:'Karla',sans-serif;font-weight:300">
+
+  <!-- nav -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:28px 64px;border-bottom:1px solid #e2ddd3">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.42em;font-weight:400">K A N S O</div>
+    <div style="display:flex;gap:44px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase">
+      <span>Coffee</span><span>Goods</span><span>Process</span><span>Journal</span>
+    </div>
+    <div style="font-size:12.5px;letter-spacing:.14em;text-transform:uppercase">Cart — 0</div>
+  </div>
+
+  <!-- hero -->
+  <div style="display:grid;grid-template-columns:1.15fr .85fr;gap:72px;padding:104px 64px 96px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:32px">
+      <div style="font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:#8b8378">Single-origin coffee · roasted weekly in small batch</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:76px;line-height:1.06;font-weight:300">Coffee, reduced<br>to its essentials.</div>
+      <div style="font-size:15.5px;line-height:1.75;color:#5c554b;max-width:440px">Twelve-kilogram batches. Seven days of rest. Water at 93&nbsp;°C. Everything else, we leave out.</div>
+      <div style="display:flex;gap:16px;margin-top:8px">
+        <span style="padding:15px 34px;background:#292521;color:#f7f5f0;font-size:12px;letter-spacing:.18em;text-transform:uppercase">Shop the roast</span>
+        <span style="padding:15px 34px;border:1px solid #292521;font-size:12px;letter-spacing:.18em;text-transform:uppercase">Our process</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center">
+      <svg width="360" height="420" viewBox="0 0 360 420" fill="none" stroke="#292521" stroke-width="1.1">
+        <circle cx="180" cy="250" r="130" stroke="#d8d2c6"></circle>
+        <ellipse cx="180" cy="250" rx="62" ry="92" transform="rotate(18 180 250)"></ellipse>
+        <path d="M158 172 C 196 212, 158 288, 202 328" stroke-width="1.1"></path>
+        <path d="M168 96 C 156 76, 180 64, 172 44" stroke="#a89e8e"></path>
+        <path d="M196 96 C 184 76, 208 64, 200 44" stroke="#a89e8e"></path>
+        <line x1="60" y1="404" x2="300" y2="404" stroke="#d8d2c6"></line>
+        <text x="180" y="398" text-anchor="middle" font-family="Karla" font-size="10" letter-spacing="3" fill="#8b8378" stroke="none">ARABICA · TYPICA</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- featured coffees -->
+  <div style="padding:0 64px 96px;display:flex;flex-direction:column;gap:44px">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid #e2ddd3;padding-top:28px">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:400">This season's roast</div>
+      <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8b8378">All coffee →</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:#e2ddd3;border:1px solid #e2ddd3">
+      <div style="background:#f7f5f0;padding:40px 36px;display:flex;flex-direction:column;gap:20px">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#292521" stroke-width="1"><ellipse cx="32" cy="32" rx="14" ry="21" transform="rotate(20 32 32)"></ellipse><path d="M27 15 C 36 24, 27 40, 37 49"></path></svg>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px">Yirgacheffe Idido</div>
+        <div style="font-size:12px;line-height:2;letter-spacing:.06em;color:#5c554b;font-family:'Karla',sans-serif">ETHIOPIA · 2,050 M<br>WASHED · HEIRLOOM<br>JASMINE / BERGAMOT / APRICOT</div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #e2ddd3;padding-top:16px"><span style="font-size:14px">250 g — ₹650</span><span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase">Add →</span></div>
+      </div>
+      <div style="background:#f7f5f0;padding:40px 36px;display:flex;flex-direction:column;gap:20px">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#292521" stroke-width="1"><circle cx="32" cy="32" r="20"></circle><circle cx="32" cy="32" r="9" stroke="#a89e8e"></circle></svg>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px">Huila La Palma</div>
+        <div style="font-size:12px;line-height:2;letter-spacing:.06em;color:#5c554b">COLOMBIA · 1,750 M<br>HONEY · PINK BOURBON<br>PANELA / PLUM / COCOA NIB</div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #e2ddd3;padding-top:16px"><span style="font-size:14px">250 g — ₹600</span><span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase">Add →</span></div>
+      </div>
+      <div style="background:#f7f5f0;padding:40px 36px;display:flex;flex-direction:column;gap:20px">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#292521" stroke-width="1"><path d="M14 20 H50 L42 48 H22 Z"></path><line x1="10" y1="52" x2="54" y2="52" stroke="#a89e8e"></line></svg>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px">Kiamugumo AB</div>
+        <div style="font-size:12px;line-height:2;letter-spacing:.06em;color:#5c554b">KENYA · 1,850 M<br>WASHED · SL28 / SL34<br>BLACKCURRANT / TOMATO / CANE</div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #e2ddd3;padding-top:16px"><span style="font-size:14px">250 g — ₹750</span><span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase">Add →</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- process band -->
+  <div style="background:#efeae0;padding:88px 64px;display:grid;grid-template-columns:.8fr 1.2fr;gap:72px">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <div style="font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:#8b8378">The process</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:44px;line-height:1.15;font-weight:300">Four decisions,<br>made carefully.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px 56px">
+      <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid #d8d2c6;padding-top:18px"><div style="font-family:'Cormorant Garamond',serif;font-size:20px">01 — Source</div><div style="font-size:13.5px;line-height:1.7;color:#5c554b">Direct relationships with nine farms. We pay 2.4× the commodity price, every harvest.</div></div>
+      <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid #d8d2c6;padding-top:18px"><div style="font-family:'Cormorant Garamond',serif;font-size:20px">02 — Roast</div><div style="font-size:13.5px;line-height:1.7;color:#5c554b">Profiled by hand on a 1958 Probat. First crack logged to the second; development held under 18%.</div></div>
+      <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid #d8d2c6;padding-top:18px"><div style="font-family:'Cormorant Garamond',serif;font-size:20px">03 — Rest</div><div style="font-size:13.5px;line-height:1.7;color:#5c554b">Seven days of degassing before any bag ships. Roast date printed, never a best-before.</div></div>
+      <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid #d8d2c6;padding-top:18px"><div style="font-family:'Cormorant Garamond',serif;font-size:20px">04 — Brew</div><div style="font-size:13.5px;line-height:1.7;color:#5c554b">A recipe card in every box: dose, ratio, temperature, time. Nothing left to guesswork.</div></div>
+    </div>
+  </div>
+
+  <!-- accessories -->
+  <div style="padding:96px 64px;display:flex;flex-direction:column;gap:44px">
+    <div style="display:flex;align-items:baseline;justify-content:space-between">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:400">Tools of the ritual</div>
+      <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8b8378">All goods →</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <img src="https://images.unsplash.com/photo-1524350876685-274059332603?auto=format&fit=crop&w=800&q=80" alt="Gooseneck kettle" style="width:100%;height:340px;object-fit:cover;display:block;filter:saturate(.82)">
+        <div style="display:flex;justify-content:space-between;font-size:13.5px"><span>Gooseneck kettle, matte steel</span><span style="color:#8b8378">₹5,000</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80" alt="Ceramic pour-over dripper" style="width:100%;height:340px;object-fit:cover;display:block;filter:saturate(.82)">
+        <div style="display:flex;justify-content:space-between;font-size:13.5px"><span>Ceramic dripper, unglazed</span><span style="color:#8b8378">₹2,400</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=800&q=80" alt="Stoneware cup" style="width:100%;height:340px;object-fit:cover;display:block;filter:saturate(.82)">
+        <div style="display:flex;justify-content:space-between;font-size:13.5px"><span>Stoneware cup, 180 ml</span><span style="color:#8b8378">₹1,500</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- subscription -->
+  <div style="margin:0 64px;border:1px solid #292521;padding:72px;display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center">
+    <svg width="54" height="54" viewBox="0 0 54 54" fill="none" stroke="#292521" stroke-width="1"><circle cx="27" cy="27" r="20"></circle><path d="M27 7 A20 20 0 0 1 47 27" stroke-width="2"></path></svg>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300">Never brew stale coffee again.</div>
+    <div style="font-size:14.5px;line-height:1.7;color:#5c554b;max-width:480px">A new origin every fortnight, shipped the day it finishes resting. Pause or cancel any time. From ₹1,500 per delivery.</div>
+    <span style="padding:15px 38px;background:#292521;color:#f7f5f0;font-size:12px;letter-spacing:.18em;text-transform:uppercase;margin-top:6px">Start a subscription</span>
+  </div>
+
+  <!-- journal + press -->
+  <div style="padding:96px 64px 72px;display:grid;grid-template-columns:1fr 1fr;gap:72px">
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:#8b8378">Journal</div>
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div style="border-top:1px solid #e2ddd3;padding:18px 0;display:flex;justify-content:space-between;gap:24px"><span style="font-family:'Cormorant Garamond',serif;font-size:20px">Why we hold development under 18%</span><span style="font-size:12px;color:#8b8378;white-space:nowrap">No. 14</span></div>
+        <div style="border-top:1px solid #e2ddd3;padding:18px 0;display:flex;justify-content:space-between;gap:24px"><span style="font-family:'Cormorant Garamond',serif;font-size:20px">A visit to Idido, Yirgacheffe</span><span style="font-size:12px;color:#8b8378;white-space:nowrap">No. 13</span></div>
+        <div style="border-top:1px solid #e2ddd3;border-bottom:1px solid #e2ddd3;padding:18px 0;display:flex;justify-content:space-between;gap:24px"><span style="font-family:'Cormorant Garamond',serif;font-size:20px">The case for a coarser grind</span><span style="font-size:12px;color:#8b8378;white-space:nowrap">No. 12</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:#8b8378">As seen in</div>
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;line-height:1.6;color:#5c554b">“The most disciplined roasting programme we have tasted this year.”</div>
+        <div style="display:flex;gap:36px;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:#8b8378;flex-wrap:wrap"><span>Monocle</span><span>Kinfolk</span><span>Sprudge</span><span>Standart</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div style="border-top:1px solid #e2ddd3;padding:36px 64px;display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8b8378">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.42em;color:#292521">K A N S O</span>
+    <span>Shipping · Wholesale · Contact</span>
+    <span>© 2026</span>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ OPTION 1B — VESPER (warm engraved editorial) ============ -->
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>VESPER — warm &amp; earthy · engraved label aesthetic · caslon serif · framed, centered</div>
+<div class="dv-card" style="width:1280px">
+<div data-screen-label="1b VESPER" style="background:#ede4d3;color:#2c2016;font-family:'Libre Franklin',sans-serif;font-weight:300">
+
+  <!-- top ticker -->
+  <div style="background:#2c2016;color:#ede4d3;text-align:center;padding:9px;font-size:11px;letter-spacing:.26em;text-transform:uppercase">Roasted Tuesdays &amp; Fridays — free shipping over ₹1,500</div>
+
+  <!-- nav -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:26px 60px;border-bottom:2px solid #2c2016">
+    <div style="display:flex;gap:36px;font-size:12px;letter-spacing:.16em;text-transform:uppercase">
+      <span>Coffee</span><span>Wares</span><span>Almanac</span>
+    </div>
+    <div style="font-family:'Libre Caslon Text',serif;font-size:26px;letter-spacing:.08em">VESPER<span style="font-size:13px;vertical-align:super;letter-spacing:.2em">&nbsp;CO.</span></div>
+    <div style="display:flex;gap:36px;font-size:12px;letter-spacing:.16em;text-transform:uppercase">
+      <span>Subscribe</span><span>Cart (0)</span>
+    </div>
+  </div>
+
+  <!-- hero: framed label -->
+  <div style="padding:64px 60px 72px;display:flex;justify-content:center">
+    <div style="border:1px solid #2c2016;outline:1px solid #2c2016;outline-offset:5px;padding:72px 90px;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center;max-width:860px;background:#f2ebdd">
+      <svg width="88" height="60" viewBox="0 0 88 60" fill="none" stroke="#2c2016" stroke-width="1">
+        <ellipse cx="30" cy="34" rx="12" ry="18" transform="rotate(-16 30 34)"></ellipse>
+        <path d="M26 19 C 33 27, 25 41, 34 49" ></path>
+        <ellipse cx="58" cy="34" rx="12" ry="18" transform="rotate(16 58 34)"></ellipse>
+        <path d="M62 19 C 55 27, 63 41, 54 49"></path>
+        <path d="M44 12 C 40 8, 46 5, 44 1" stroke="#8a5a34"></path>
+      </svg>
+      <div style="font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#8a5a34">Est. MMXXVI · Small-batch roastery</div>
+      <div style="font-family:'Libre Caslon Text',serif;font-size:58px;line-height:1.12;font-weight:400">Coffee of uncommon<br>provenance, roasted<br>with obstinate care.</div>
+      <div style="display:flex;align-items:center;gap:14px;color:#8a5a34"><span style="width:60px;height:1px;background:#8a5a34;display:block"></span><span style="font-size:16px">✳</span><span style="width:60px;height:1px;background:#8a5a34;display:block"></span></div>
+      <div style="font-size:14.5px;line-height:1.8;max-width:520px;color:#5a4a38">Nine farms. Two roast days a week. One 1962 drum roaster we refuse to replace. Every lot cupped at 8.6 or above — or it never leaves the roastery.</div>
+      <span style="padding:16px 44px;background:#2c2016;color:#ede4d3;font-size:12px;letter-spacing:.22em;text-transform:uppercase;margin-top:8px">Browse the coffees</span>
+    </div>
+  </div>
+
+  <!-- featured coffees as apothecary labels -->
+  <div style="padding:0 60px 80px;display:flex;flex-direction:column;gap:36px">
+    <div style="display:flex;align-items:center;gap:20px;justify-content:center">
+      <span style="height:1px;background:#c4b49a;flex:1"></span>
+      <span style="font-family:'Libre Caslon Text',serif;font-size:30px;font-style:italic">The current lots</span>
+      <span style="height:1px;background:#c4b49a;flex:1"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px">
+      <div style="border:1px solid #2c2016;background:#f2ebdd;padding:34px 30px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
+        <div style="font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:#8a5a34">Lot No. 41 — Washed</div>
+        <div style="font-family:'Libre Caslon Text',serif;font-size:24px">Gedeb, Ethiopia</div>
+        <div style="width:44px;height:1px;background:#8a5a34"></div>
+        <div style="font-size:12.5px;line-height:1.9;color:#5a4a38">Heirloom varietals · 2,100 m<br>Cupping score 8.9<br><span style="font-style:italic;font-family:'Libre Caslon Text',serif">peach, honeysuckle, black tea</span></div>
+        <div style="font-size:15px;font-family:'Libre Caslon Text',serif;margin-top:6px">₹750 — 250 g</div>
+        <span style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;border-bottom:1px solid #2c2016;padding-bottom:3px">Add to cart</span>
+      </div>
+      <div style="border:1px solid #2c2016;background:#f2ebdd;padding:34px 30px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;position:relative">
+        <div style="position:absolute;top:-12px;background:#8a5a34;color:#ede4d3;font-size:10px;letter-spacing:.26em;text-transform:uppercase;padding:5px 14px">Roaster's pick</div>
+        <div style="font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:#8a5a34">Lot No. 38 — Natural</div>
+        <div style="font-family:'Libre Caslon Text',serif;font-size:24px">Carmo de Minas, Brazil</div>
+        <div style="width:44px;height:1px;background:#8a5a34"></div>
+        <div style="font-size:12.5px;line-height:1.9;color:#5a4a38">Yellow Bourbon · 1,150 m<br>Cupping score 8.7<br><span style="font-style:italic;font-family:'Libre Caslon Text',serif">hazelnut, dried fig, molasses</span></div>
+        <div style="font-size:15px;font-family:'Libre Caslon Text',serif;margin-top:6px">₹600 — 250 g</div>
+        <span style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;border-bottom:1px solid #2c2016;padding-bottom:3px">Add to cart</span>
+      </div>
+      <div style="border:1px solid #2c2016;background:#f2ebdd;padding:34px 30px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
+        <div style="font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:#8a5a34">Lot No. 43 — Anaerobic</div>
+        <div style="font-family:'Libre Caslon Text',serif;font-size:24px">Tarrazú, Costa Rica</div>
+        <div style="width:44px;height:1px;background:#8a5a34"></div>
+        <div style="font-size:12.5px;line-height:1.9;color:#5a4a38">Caturra · 1,900 m<br>Cupping score 8.8<br><span style="font-style:italic;font-family:'Libre Caslon Text',serif">red apple, cinnamon, cacao</span></div>
+        <div style="font-size:15px;font-family:'Libre Caslon Text',serif;margin-top:6px">₹800 — 250 g</div>
+        <span style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;border-bottom:1px solid #2c2016;padding-bottom:3px">Add to cart</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- story band with photo -->
+  <div style="background:#2c2016;color:#ede4d3;display:grid;grid-template-columns:1fr 1fr">
+    <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1000&q=80" alt="Roasted coffee beans" style="width:100%;height:520px;object-fit:cover;display:block;filter:sepia(.35) saturate(.75)">
+    <div style="padding:80px 72px;display:flex;flex-direction:column;justify-content:center;gap:26px">
+      <div style="font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#c9a878">The craft</div>
+      <div style="font-family:'Libre Caslon Text',serif;font-size:40px;line-height:1.2">We log every roast<br>to the second.</div>
+      <div style="font-size:14px;line-height:1.9;color:#cbbba2;max-width:420px">Charge temperature, turning point, rate of rise, first crack, drop. Sixty-one data points per batch, kept in a ledger since roast one. Obsessive? Certainly. That is rather the point.</div>
+      <div style="display:flex;gap:48px;margin-top:8px">
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Libre Caslon Text',serif;font-size:30px">61</span><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#c9a878">Data points / batch</span></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Libre Caslon Text',serif;font-size:30px">8.6+</span><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#c9a878">Minimum cup score</span></div>
+        <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Libre Caslon Text',serif;font-size:30px">9</span><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#c9a878">Partner farms</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- wares -->
+  <div style="padding:80px 60px;display:flex;flex-direction:column;gap:36px">
+    <div style="display:flex;align-items:center;gap:20px;justify-content:center">
+      <span style="height:1px;background:#c4b49a;flex:1"></span>
+      <span style="font-family:'Libre Caslon Text',serif;font-size:30px;font-style:italic">Wares for the table</span>
+      <span style="height:1px;background:#c4b49a;flex:1"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px">
+      <div style="display:flex;flex-direction:column;gap:12px;text-align:center">
+        <div style="border:1px solid #c4b49a;padding:10px"><img src="https://images.unsplash.com/photo-1524350876685-274059332603?auto=format&fit=crop&w=600&q=80" alt="Kettle" style="width:100%;height:220px;object-fit:cover;display:block;filter:sepia(.25) saturate(.8)"></div>
+        <div style="font-family:'Libre Caslon Text',serif;font-size:16px">Brass-handled kettle</div>
+        <div style="font-size:12.5px;color:#8a5a34">₹5,400</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;text-align:center">
+        <div style="border:1px solid #c4b49a;padding:10px"><img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=600&q=80" alt="Pour over" style="width:100%;height:220px;object-fit:cover;display:block;filter:sepia(.25) saturate(.8)"></div>
+        <div style="font-family:'Libre Caslon Text',serif;font-size:16px">Glass brewer, 2-cup</div>
+        <div style="font-size:12.5px;color:#8a5a34">₹2,700</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;text-align:center">
+        <div style="border:1px solid #c4b49a;padding:10px"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" alt="Cup" style="width:100%;height:220px;object-fit:cover;display:block;filter:sepia(.25) saturate(.8)"></div>
+        <div style="font-family:'Libre Caslon Text',serif;font-size:16px">Café cup &amp; saucer</div>
+        <div style="font-size:12.5px;color:#8a5a34">₹1,900</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;text-align:center">
+        <div style="border:1px solid #c4b49a;padding:10px"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Coffee" style="width:100%;height:220px;object-fit:cover;display:block;filter:sepia(.25) saturate(.8)"></div>
+        <div style="font-family:'Libre Caslon Text',serif;font-size:16px">Tasting flight, gift box</div>
+        <div style="font-size:12.5px;color:#8a5a34">₹3,300</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- subscription + almanac -->
+  <div style="padding:0 60px 80px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px">
+    <div style="border:1px solid #2c2016;outline:1px solid #2c2016;outline-offset:4px;background:#f2ebdd;padding:56px;display:flex;flex-direction:column;gap:18px">
+      <div style="font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#8a5a34">The standing order</div>
+      <div style="font-family:'Libre Caslon Text',serif;font-size:34px;line-height:1.2">Fresh coffee, delivered<br>like clockwork.</div>
+      <div style="font-size:13.5px;line-height:1.8;color:#5a4a38">Choose your rhythm — weekly, fortnightly, monthly. We roast to order and ship the same afternoon. Members receive the Almanac and first claim on micro-lots.</div>
+      <span style="padding:15px 36px;background:#2c2016;color:#ede4d3;font-size:12px;letter-spacing:.22em;text-transform:uppercase;align-self:flex-start;margin-top:6px">Begin — from ₹1,500</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0;border-top:2px solid #2c2016">
+      <div style="font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#8a5a34;padding:20px 0 6px">From the Almanac</div>
+      <div style="border-bottom:1px solid #c4b49a;padding:16px 0;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Libre Caslon Text',serif;font-size:18px">On resting: why day seven matters</span><span style="font-size:11.5px;color:#8a5a34;letter-spacing:.14em;text-transform:uppercase">Vol. II · No. 6</span></div>
+      <div style="border-bottom:1px solid #c4b49a;padding:16px 0;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Libre Caslon Text',serif;font-size:18px">A ledger of sixty-one numbers</span><span style="font-size:11.5px;color:#8a5a34;letter-spacing:.14em;text-transform:uppercase">Vol. II · No. 5</span></div>
+      <div style="border-bottom:1px solid #c4b49a;padding:16px 0;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Libre Caslon Text',serif;font-size:18px">Harvest notes from Tarrazú</span><span style="font-size:11.5px;color:#8a5a34;letter-spacing:.14em;text-transform:uppercase">Vol. II · No. 4</span></div>
+    </div>
+  </div>
+
+  <!-- press -->
+  <div style="border-top:1px solid #c4b49a;border-bottom:1px solid #c4b49a;margin:0 60px;padding:28px 0;display:flex;justify-content:center;gap:56px;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:#8a5a34;flex-wrap:wrap">
+    <span>Monocle</span><span>Financial Times</span><span>Kinfolk</span><span>Standart</span><span>Sprudge</span>
+  </div>
+
+  <!-- footer -->
+  <div style="padding:44px 60px;display:flex;justify-content:space-between;align-items:center;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#8a5a34">
+    <span style="font-family:'Libre Caslon Text',serif;font-size:18px;color:#2c2016;letter-spacing:.08em">VESPER CO.</span>
+    <span>Shipping · Wholesale · Visit the roastery</span>
+    <span>© MMXXVI</span>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ============ OPTION 1C — FORM. (dark, geometric, Swiss) ============ -->
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>FORM. — dark espresso · geometric abstract · Swiss sans + mono specs · asymmetric grid</div>
+<div class="dv-card" style="width:1280px">
+<div data-screen-label="1c FORM" style="background:#1b1512;color:#eae3d8;font-family:'Archivo',sans-serif;font-weight:300">
+
+  <!-- nav -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:26px 56px;border-bottom:1px solid #38302a">
+    <div style="font-size:21px;font-weight:600;letter-spacing:.04em">FORM<span style="color:#c07a4e">.</span></div>
+    <div style="display:flex;gap:40px;font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#a89886">
+      <span>01 Coffee</span><span>02 Objects</span><span>03 Method</span><span>04 Index</span>
+    </div>
+    <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.1em">CART [0]</div>
+  </div>
+
+  <!-- hero -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #38302a">
+    <div style="padding:96px 56px;display:flex;flex-direction:column;gap:30px;justify-content:center;border-right:1px solid #38302a">
+      <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:#c07a4e">EXTRACTION IS A SCIENCE. TASTE IS NOT.</div>
+      <div style="font-size:74px;line-height:1.02;font-weight:500;letter-spacing:-.02em">Precision-roasted<br>coffee for people<br>who measure.</div>
+      <div style="font-size:15px;line-height:1.75;color:#a89886;max-width:420px">Every bag ships with its roast curve, agtron score, and a brew recipe tested across 40 extractions. You bring the scale.</div>
+      <div style="display:flex;gap:14px;margin-top:6px">
+        <span style="padding:16px 34px;background:#eae3d8;color:#1b1512;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500">Shop coffee</span>
+        <span style="padding:16px 34px;border:1px solid #56493f;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#eae3d8">The method</span>
+      </div>
+    </div>
+    <div style="position:relative;display:flex;align-items:center;justify-content:center;padding:60px;background:#211a15;overflow:hidden">
+      <svg width="420" height="420" viewBox="0 0 420 420" fill="none">
+        <circle cx="210" cy="210" r="170" stroke="#38302a" stroke-width="1"></circle>
+        <circle cx="210" cy="210" r="120" stroke="#56493f" stroke-width="1"></circle>
+        <path d="M210 40 A170 170 0 0 1 380 210" stroke="#c07a4e" stroke-width="3"></path>
+        <circle cx="210" cy="210" r="58" fill="#c07a4e"></circle>
+        <ellipse cx="210" cy="210" rx="26" ry="40" transform="rotate(20 210 210)" stroke="#1b1512" stroke-width="2" fill="none"></ellipse>
+        <path d="M200 176 C 216 194, 200 226, 220 244" stroke="#1b1512" stroke-width="2"></path>
+        <rect x="330" y="330" width="52" height="52" stroke="#56493f" stroke-width="1" transform="rotate(45 356 356)"></rect>
+      </svg>
+      <div style="position:absolute;bottom:24px;left:24px;font-family:'Space Mono',monospace;font-size:10.5px;color:#7a6a5c;letter-spacing:.1em">FIG. 01 — ROAST CURVE, 11:42 TOTAL / FC 9:58</div>
+    </div>
+  </div>
+
+  <!-- featured coffees: spec-sheet rows -->
+  <div style="border-bottom:1px solid #38302a">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;padding:56px 56px 32px">
+      <div style="font-size:34px;font-weight:500;letter-spacing:-.01em">Current lineup</div>
+      <div style="font-family:'Space Mono',monospace;font-size:11.5px;color:#a89886;letter-spacing:.1em">03 LOTS IN ROTATION →</div>
+    </div>
+    <div style="display:grid;grid-template-columns:70px 1.3fr 1fr 1fr .6fr .5fr;gap:0;padding:0 56px 64px;font-size:14px">
+      <div style="display:contents">
+        <div style="border-top:1px solid #38302a;padding:22px 12px 22px 0;font-family:'Space Mono',monospace;color:#c07a4e;font-size:12px">N°1</div>
+        <div style="border-top:1px solid #38302a;padding:22px 12px;font-weight:500;font-size:17px">Gesha Village — Ethiopia</div>
+        <div style="border-top:1px solid #38302a;padding:22px 12px;color:#a89886;font-family:'Space Mono',monospace;font-size:12px">WASHED · 1,950 M · AGTRON 78</div>
+        <div style="border-top:1px solid #38302a;padding:22px 12px;color:#a89886;font-style:normal">bergamot · white peach · silk</div>
+        <div style="border-top:1px solid #38302a;padding:22px 12px;font-family:'Space Mono',monospace;font-size:13px">₹950</div>
+        <div style="border-top:1px solid #38302a;padding:22px 0;text-align:right"><span style="border:1px solid #56493f;padding:9px 18px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em">ADD +</span></div>
+      </div>
+      <div style="display:contents">
+        <div style="border-top:1px solid #38302a;padding:22px 12px 22px 0;font-family:'Space Mono',monospace;color:#c07a4e;font-size:12px">N°2</div>
+        <div style="border-top:1px solid #38302a;padding:22px 12px;font-weight:500;font-size:17px">Finca Deborah — Panama</div>
+        <div style="border-top:1px solid #38302a;padding:22px 12px;color:#a89886;font-family:'Space Mono',monospace;font-size:12px">CARBONIC · 1,900 M · AGTRON 82</div>
+        <div style="border-top:1px solid #38302a;padding:22px 12px;color:#a89886">papaya · jasmine · lime zest</div>
+        <div style="border-top:1px solid #38302a;padding:22px 12px;font-family:'Space Mono',monospace;font-size:13px">₹1,150</div>
+        <div style="border-top:1px solid #38302a;padding:22px 0;text-align:right"><span style="border:1px solid #56493f;padding:9px 18px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em">ADD +</span></div>
+      </div>
+      <div style="display:contents">
+        <div style="border-top:1px solid #38302a;border-bottom:1px solid #38302a;padding:22px 12px 22px 0;font-family:'Space Mono',monospace;color:#c07a4e;font-size:12px">N°3</div>
+        <div style="border-top:1px solid #38302a;border-bottom:1px solid #38302a;padding:22px 12px;font-weight:500;font-size:17px">Cerro Azul — Colombia</div>
+        <div style="border-top:1px solid #38302a;border-bottom:1px solid #38302a;padding:22px 12px;color:#a89886;font-family:'Space Mono',monospace;font-size:12px">THERMAL SHOCK · 1,700 M · AGTRON 75</div>
+        <div style="border-top:1px solid #38302a;border-bottom:1px solid #38302a;padding:22px 12px;color:#a89886">lychee · rose · cane sugar</div>
+        <div style="border-top:1px solid #38302a;border-bottom:1px solid #38302a;padding:22px 12px;font-family:'Space Mono',monospace;font-size:13px">₹1,050</div>
+        <div style="border-top:1px solid #38302a;border-bottom:1px solid #38302a;padding:22px 0;text-align:right"><span style="border:1px solid #56493f;padding:9px 18px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em">ADD +</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- method: asymmetric photo + geometry -->
+  <div style="display:grid;grid-template-columns:.9fr 1.1fr;border-bottom:1px solid #38302a">
+    <div style="padding:80px 56px;display:flex;flex-direction:column;gap:26px;justify-content:center">
+      <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:#c07a4e">03 — METHOD</div>
+      <div style="font-size:44px;line-height:1.08;font-weight:500;letter-spacing:-.015em">40 extractions<br>before we publish<br>one recipe.</div>
+      <div style="display:flex;flex-direction:column;gap:0;margin-top:8px">
+        <div style="display:flex;justify-content:space-between;border-top:1px solid #38302a;padding:14px 0;font-size:14px"><span style="color:#a89886">Dose</span><span style="font-family:'Space Mono',monospace;font-size:13px">18.0 g ± 0.1</span></div>
+        <div style="display:flex;justify-content:space-between;border-top:1px solid #38302a;padding:14px 0;font-size:14px"><span style="color:#a89886">Ratio</span><span style="font-family:'Space Mono',monospace;font-size:13px">1 : 16.5</span></div>
+        <div style="display:flex;justify-content:space-between;border-top:1px solid #38302a;padding:14px 0;font-size:14px"><span style="color:#a89886">Water</span><span style="font-family:'Space Mono',monospace;font-size:13px">93 °C · 80 PPM</span></div>
+        <div style="display:flex;justify-content:space-between;border-top:1px solid #38302a;border-bottom:1px solid #38302a;padding:14px 0;font-size:14px"><span style="color:#a89886">Target TDS</span><span style="font-family:'Space Mono',monospace;font-size:13px">1.38 – 1.42%</span></div>
+      </div>
+    </div>
+    <div style="position:relative">
+      <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1100&q=80" alt="Pour over brewing" style="width:100%;height:100%;min-height:520px;object-fit:cover;display:block;filter:saturate(.7) contrast(1.05)">
+      <div style="position:absolute;top:32px;right:32px;width:88px;height:88px;border-radius:50%;background:#c07a4e;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10.5px;color:#1b1512;text-align:center;line-height:1.4">FIG.02<br>BLOOM</div>
+    </div>
+  </div>
+
+  <!-- objects -->
+  <div style="padding:72px 56px;border-bottom:1px solid #38302a;display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <div style="font-size:34px;font-weight:500">Objects</div>
+      <div style="font-family:'Space Mono',monospace;font-size:11.5px;color:#a89886;letter-spacing:.1em">02 — TOOLS THAT EARN THEIR COUNTER SPACE →</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="position:relative;overflow:hidden"><img src="https://images.unsplash.com/photo-1524350876685-274059332603?auto=format&fit=crop&w=800&q=80" alt="Kettle" style="width:100%;height:300px;object-fit:cover;display:block;filter:saturate(.7)"><div style="position:absolute;top:14px;left:14px;font-family:'Space Mono',monospace;font-size:10.5px;background:#1b1512;padding:5px 10px;letter-spacing:.1em">OBJ-01</div></div>
+        <div style="display:flex;justify-content:space-between;font-size:14.5px"><span style="font-weight:500">Variable-temp kettle</span><span style="font-family:'Space Mono',monospace;font-size:13px;color:#c07a4e">₹6,900</span></div>
+        <div style="font-size:12.5px;color:#7a6a5c;font-family:'Space Mono',monospace">±0.5 °C HOLD · 900 ML</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="position:relative;overflow:hidden"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80" alt="Cup" style="width:100%;height:300px;object-fit:cover;display:block;filter:saturate(.7)"><div style="position:absolute;top:14px;left:14px;font-family:'Space Mono',monospace;font-size:10.5px;background:#1b1512;padding:5px 10px;letter-spacing:.1em">OBJ-02</div></div>
+        <div style="display:flex;justify-content:space-between;font-size:14.5px"><span style="font-weight:500">Double-wall cup, pair</span><span style="font-family:'Space Mono',monospace;font-size:13px;color:#c07a4e">₹2,600</span></div>
+        <div style="font-size:12.5px;color:#7a6a5c;font-family:'Space Mono',monospace">BOROSILICATE · 220 ML</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="position:relative;overflow:hidden"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80" alt="Coffee top-down" style="width:100%;height:300px;object-fit:cover;display:block;filter:saturate(.7)"><div style="position:absolute;top:14px;left:14px;font-family:'Space Mono',monospace;font-size:10.5px;background:#1b1512;padding:5px 10px;letter-spacing:.1em">OBJ-03</div></div>
+        <div style="display:flex;justify-content:space-between;font-size:14.5px"><span style="font-weight:500">Brew scale, 0.1 g</span><span style="font-family:'Space Mono',monospace;font-size:13px;color:#c07a4e">₹4,300</span></div>
+        <div style="font-size:12.5px;color:#7a6a5c;font-family:'Space Mono',monospace">AUTO-TIMER · USB-C</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- subscription -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #38302a">
+    <div style="padding:72px 56px;border-right:1px solid #38302a;display:flex;flex-direction:column;gap:22px;justify-content:center">
+      <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:#c07a4e">THE ROTATION</div>
+      <div style="font-size:40px;line-height:1.1;font-weight:500;letter-spacing:-.015em">A new variable,<br>every two weeks.</div>
+      <div style="font-size:14.5px;line-height:1.75;color:#a89886;max-width:400px">Subscribers get each lot 10 days before general release, plus the full roast data sheet. From ₹1,500 per shipment. Cancel whenever.</div>
+      <span style="padding:16px 34px;background:#c07a4e;color:#1b1512;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;align-self:flex-start;margin-top:4px">Join the rotation</span>
+    </div>
+    <div style="padding:72px 56px;display:flex;flex-direction:column;gap:0;justify-content:center">
+      <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:#c07a4e;padding-bottom:20px">04 — INDEX</div>
+      <div style="border-top:1px solid #38302a;padding:18px 0;display:flex;justify-content:space-between;gap:20px;align-items:baseline"><span style="font-size:17px;font-weight:500">Reading a roast curve, properly</span><span style="font-family:'Space Mono',monospace;font-size:11px;color:#7a6a5c">IDX-09</span></div>
+      <div style="border-top:1px solid #38302a;padding:18px 0;display:flex;justify-content:space-between;gap:20px;align-items:baseline"><span style="font-size:17px;font-weight:500">Water chemistry: the 80 PPM argument</span><span style="font-family:'Space Mono',monospace;font-size:11px;color:#7a6a5c">IDX-08</span></div>
+      <div style="border-top:1px solid #38302a;border-bottom:1px solid #38302a;padding:18px 0;display:flex;justify-content:space-between;gap:20px;align-items:baseline"><span style="font-size:17px;font-weight:500">Why we publish our green prices</span><span style="font-family:'Space Mono',monospace;font-size:11px;color:#7a6a5c">IDX-07</span></div>
+    </div>
+  </div>
+
+  <!-- press + footer -->
+  <div style="padding:32px 56px;display:flex;justify-content:center;gap:52px;border-bottom:1px solid #38302a;font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.18em;color:#7a6a5c;flex-wrap:wrap">
+    <span>WIRED</span><span>MONOCLE</span><span>SPRUDGE</span><span>DEZEEN</span><span>STANDART</span>
+  </div>
+  <div style="padding:36px 56px;display:flex;justify-content:space-between;align-items:center;font-family:'Space Mono',monospace;font-size:11px;color:#7a6a5c;letter-spacing:.1em">
+    <span style="font-family:'Archivo',sans-serif;font-size:16px;font-weight:600;color:#eae3d8">FORM<span style="color:#c07a4e">.</span></span>
+    <span>SHIPPING / WHOLESALE / CONTACT</span>
+    <span>© 2026 — ROASTED AT 47.61° N</span>
+  </div>
+</div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "build <a class="dv-oid" href="#1a">1a</a> as the full responsive page" · "mix <a class="dv-oid" href="#1b">1b</a>'s framed hero with <a class="dv-oid" href="#1a">1a</a>'s palette" · "show <a class="dv-oid" href="#1c">1c</a> in light mode"</p>
+</section>
+
+</x-dc>
+</body>
+</html>

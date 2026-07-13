@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0}
+:root{--k-hero:#c6e7cd;--k-ink:#1e352a;--k-accent:#e2603a;--k-paper:#faf6ee}
+body{background:#faf6ee}
+a{color:#e2603a;text-decoration:none}
+a:hover{color:#1e352a}
+*{box-sizing:border-box}
+::selection{background:#e2603a;color:#faf6ee}
+@keyframes koelMarquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes koelSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes koelBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes koelBlink{0%,92%,100%{transform:scaleY(0)}94%,98%{transform:scaleY(1)}}
+@keyframes koelSteamIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes koelSteamRise{0%{opacity:0;transform:translateY(8px) translateX(-50%) scaleX(1)}18%{opacity:.55}55%{opacity:.35}100%{opacity:0;transform:translateY(-70px) translateX(-50%) scaleX(1.7)}}
+@keyframes koelWiggle{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.koel-stamp{width:104px;height:104px;top:clamp(8px,2vw,26px);right:clamp(8px,3vw,60px)}
+.koel-stamp svg{width:100%;height:100%;display:block}
+@media (max-width:640px){
+  .koel-stamp{width:64px;height:64px;top:10px;right:10px}
+  .koel-hero-copy{padding-right:110px}
+}
+/* Defect A: keep the sticky header on one line down to 320px */
+@media (max-width:479px){
+  .koel-wordmark{font-size:15px!important;white-space:nowrap}
+  .koel-nav-text{display:none!important}
+}
+/* Defect B: lift the scroll-drawn route above the (now single-column) photo stack so it stays visible */
+@media (max-width:520px){
+  .koel-route-svg{position:static!important;transform:none!important;margin-bottom:14px;pointer-events:auto!important}
+}
+/* Defect C: keep the perching mascot off the rewrapped headline glyphs on mobile */
+@media (max-width:640px){
+  .koel-headline-bird{width:40px!important;height:35px!important;top:8px!important;right:-46px!important}
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</helmet>
+
+<div data-screen-label="KOEL V2" style="background:var(--k-paper);color:var(--k-ink);font-family:'Instrument Sans',sans-serif;position:relative;overflow-x:clip">
+
+  <!-- paper grain -->
+  <div style="position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;mix-blend-mode:multiply;background-image:url(&quot;data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='200'%20height='200'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='2'/%3E%3C/filter%3E%3Crect%20width='200'%20height='200'%20filter='url(%23n)'/%3E%3C/svg%3E&quot;)"></div>
+
+  <!-- announcement bar -->
+  <sc-if value="{{ showAnnouncement }}" hint-placeholder-val="{{ true }}">
+    <div style="background:var(--k-ink);color:#faf6ee;text-align:center;font-size:12.5px;letter-spacing:.04em;padding:9px 16px">Free shipping over ₹2,000 · roasted every Tuesday, <span style="font-family:'Caveat',cursive;font-size:15px;color:#f4c99b">roaster's rule</span> — <a href="#shop" style="color:#f4c99b;text-decoration:underline">shop coffee</a></div>
+  </sc-if>
+
+  <!-- header -->
+  <div style="position:sticky;top:0;z-index:50;background:var(--k-paper);border-bottom:2px solid var(--k-ink);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px clamp(14px,4vw,44px)">
+    <a href="Index.dc.html" style="display:flex;align-items:center;gap:10px;color:var(--k-ink)">
+      <svg width="36" height="36" viewBox="0 0 120 100" style="overflow:visible">
+        <path d="M34 66 L10 88 Q24 92 40 78" fill="#2b2331"></path>
+        <ellipse cx="56" cy="58" rx="26" ry="20" fill="#2b2331"></ellipse>
+        <circle cx="78" cy="38" r="14" fill="#2b2331"></circle>
+        <path d="M90 35 L103 40 L90 45 Z" fill="var(--k-accent)"></path>
+        <circle cx="82" cy="35" r="3.4" fill="#d63b2f"></circle><circle cx="83" cy="34" r="1.1" fill="#fff"></circle>
+        <path d="M42 54 Q56 44 68 54 Q58 68 42 62 Z" fill="#463a52"></path>
+      </svg>
+      <span class="koel-wordmark" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(17px,2.4vw,21px);letter-spacing:-.01em">koel coffee co.</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:clamp(10px,2vw,24px);font-size:13.5px;font-weight:500">
+      <a href="#shop" class="koel-nav-text" style="color:var(--k-ink)">Shop</a>
+      <a href="#journey" class="koel-nav-text" style="color:var(--k-ink)">The journey</a>
+      <button onClick="{{ toggleCart }}" style="cursor:pointer;font:inherit;font-weight:600;background:var(--k-ink);color:#faf6ee;border:none;border-radius:999px;padding:11px 18px;min-height:44px;display:flex;gap:8px;align-items:center" style-hover="background:var(--k-accent)">Basket <span style="background:#faf6ee;color:var(--k-ink);border-radius:999px;min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;padding:0 5px">{{ cartCount }}</span></button>
+    </div>
+  </div>
+
+  <!-- ===== HERO: scrapbook scene ===== -->
+  <div ref="{{ heroEl }}" style="background:var(--k-hero);border-bottom:2px solid var(--k-ink);position:relative;overflow:hidden">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(20px,4vw,56px);padding:clamp(40px,6vw,96px) clamp(16px,5vw,72px) clamp(56px,7vw,110px);position:relative">
+      <div class="koel-hero-copy" style="flex:1.3 1 340px;min-width:290px;position:relative">
+        <!-- coffee ring stain -->
+        <div style="position:absolute;left:-34px;bottom:-46px;width:150px;height:138px;border-radius:50%;border:9px solid rgba(138,75,46,.13);box-shadow:inset 0 0 0 3px rgba(138,75,46,.07);transform:rotate(-8deg) scaleX(1.06);pointer-events:none"></div>
+        <div data-reveal style="font-family:'Caveat',cursive;font-size:clamp(20px,2.4vw,28px);color:var(--k-accent);transform:rotate(-2deg)">hello Gurugram! from coffee lovers, for coffee lovers ↓</div>
+        <div data-reveal style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(40px,7vw,100px);line-height:.98;letter-spacing:-.03em;font-weight:300;text-wrap:balance;margin-top:10px">coffee <strong style="font-weight:800;position:relative;display:inline-block">curated<svg viewBox="0 0 120 14" style="position:absolute;left:-4%;bottom:-8px;width:108%;height:auto;overflow:visible"><path d="M4 9 Q30 3 60 8 T116 6" fill="none" stroke="var(--k-accent)" stroke-width="4" stroke-linecap="round"></path></svg></strong> by<br>coffee lovers — <strong style="font-weight:800">seriously</strong> <span style="position:relative;display:inline-block">fresh.<svg class="koel-headline-bird" width="64" height="56" viewBox="0 0 120 100" style="position:absolute;top:-30px;right:-44px;overflow:visible;pointer-events:none"><g style="animation:koelBob 3.2s ease-in-out infinite"><path d="M34 66 L10 88 Q24 92 40 78" fill="#2b2331"></path><ellipse cx="56" cy="58" rx="26" ry="20" fill="#2b2331"></ellipse><circle cx="78" cy="38" r="14" fill="#2b2331"></circle><path d="M90 35 L103 40 L90 45 Z" fill="var(--k-accent)"></path><circle cx="82" cy="35" r="3.4" fill="#d63b2f"></circle><circle cx="83" cy="34" r="1.1" fill="#fff"></circle><ellipse cx="82" cy="35" rx="4" ry="4" fill="#2b2331" style="transform-origin:82px 35px;animation:koelBlink 6s ease-in-out infinite"></ellipse><path d="M42 54 Q56 44 68 54 Q58 68 42 62 Z" fill="#463a52"></path><g stroke="#2b2331" stroke-width="2.4" stroke-linecap="round"><path d="M50 77 L50 92"></path><path d="M62 77 L62 92"></path></g></g></svg></span></div>
+        <div data-reveal style="font-size:clamp(15px,1.4vw,17.5px);line-height:1.65;max-width:520px;margin-top:20px">Three generations of coffee lovers — grown up in the Ghats, now roasting in Gurugram. We cup hundreds of lots and curate only the best beans across India: Biligiris, Chikmagalur, Araku, the Malabar coast. Farmers paid fairly. Beans roasted Tuesdays.</div>
+        <div data-reveal style="display:flex;gap:14px;flex-wrap:wrap;margin-top:28px">
+          <a href="#shop" style="background:var(--k-ink);color:#faf6ee;border-radius:999px;padding:16px 32px;font-weight:600;font-size:15px;min-height:44px;display:inline-flex;align-items:center" style-hover="background:var(--k-accent);color:#faf6ee">Shop the coffee</a>
+          <a href="#journey" style="background:transparent;color:var(--k-ink);border:2px solid var(--k-ink);border-radius:999px;padding:14px 30px;font-weight:600;font-size:15px;min-height:44px;display:inline-flex;align-items:center" style-hover="background:#faf6ee">Follow the bean ↓</a>
+        </div>
+      </div>
+
+      <!-- steaming polaroid of the real pour -->
+      <div data-reveal style="flex:1 1 300px;min-width:270px;display:flex;justify-content:center;position:relative">
+        <div style="position:relative;width:min(100%,360px);background:#fffdf7;border:2px solid var(--k-ink);padding:12px 12px 16px;transform:rotate(-2deg);box-shadow:4px 5px 0 rgba(30,53,42,.18)">
+          <div style="position:absolute;top:-12px;left:28px;transform:rotate(-5deg);width:88px;height:22px;background:#f0e1aa;opacity:.85;z-index:2"></div>
+          <div style="position:absolute;top:-12px;right:28px;transform:rotate(4deg);width:88px;height:22px;background:#f0e1aa;opacity:.85;z-index:2"></div>
+          <div style="position:relative;aspect-ratio:4/5;overflow:hidden">
+            <img crossorigin="anonymous" alt="Fresh kaapi being poured, steam rising" src="https://images.unsplash.com/photo-1522012188892-24beb302783d?fm=jpg&q=72&w=1000&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover">
+            <div style="position:absolute;left:50%;top:30%;width:2px;height:1px;pointer-events:none;filter:blur(5px)">
+              <span style="position:absolute;left:0;bottom:0;width:20px;height:90px;background:linear-gradient(to top,rgba(255,252,246,.9),rgba(255,252,246,0));border-radius:50%;animation:koelSteamRise 3.2s ease-in-out infinite"></span>
+              <span style="position:absolute;left:16px;bottom:0;width:16px;height:84px;background:linear-gradient(to top,rgba(255,252,246,.7),rgba(255,252,246,0));border-radius:50%;animation:koelSteamRise 3.9s ease-in-out .9s infinite"></span>
+              <span style="position:absolute;left:-14px;bottom:0;width:15px;height:80px;background:linear-gradient(to top,rgba(255,252,246,.6),rgba(255,252,246,0));border-radius:50%;animation:koelSteamRise 4.5s ease-in-out 1.7s infinite"></span>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;gap:8px">
+            <span style="font-family:'Caveat',cursive;font-size:20px">this morning's pour — batch no. 214 ✎</span>
+            <span style="font-family:'Caveat',cursive;font-size:17px;color:var(--k-accent);white-space:nowrap">no. 01</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- draggable stickers -->
+      <div data-sticker="stamp" class="koel-stamp" style="position:absolute;cursor:grab;touch-action:none;z-index:5;animation:koelSpin 18s linear infinite">
+        <svg viewBox="0 0 118 118"><defs><path id="koelArc2" d="M59,59 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"></path></defs><circle cx="59" cy="59" r="56" fill="var(--k-accent)" stroke="var(--k-ink)" stroke-width="2"></circle><text font-family="'Bricolage Grotesque',sans-serif" font-size="12" font-weight="600" letter-spacing="2.4" fill="#faf6ee"><textPath href="#koelArc2">ROASTED FRESH · EVERY TUESDAY ·</textPath></text><path d="M48 68c3-9 10-14 17-14-1.5 8.5-6 15-14 15l-3 4" fill="none" stroke="#faf6ee" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </div>
+      <div data-sticker="pill" style="position:absolute;bottom:clamp(12px,3vw,40px);left:clamp(10px,4vw,80px);cursor:grab;touch-action:none;z-index:5;transform:rotate(-4deg)">
+        <div style="background:#fffdf7;border:2px solid var(--k-ink);border-radius:999px;padding:9px 18px;font-family:'Caveat',cursive;font-size:21px;box-shadow:3px 3px 0 var(--k-ink)">drag me, I'm a sticker ☕</div>
+      </div>
+      <div data-sticker="bird" style="position:absolute;bottom:clamp(30px,7vw,90px);right:clamp(6px,2.5vw,50px);width:92px;cursor:grab;touch-action:none;z-index:5">
+        <svg width="92" height="80" viewBox="0 0 120 100" style="overflow:visible;filter:drop-shadow(2px 3px 0 rgba(30,53,42,.5))">
+          <g style="animation:koelWiggle 3.2s ease-in-out infinite;transform-origin:60px 60px">
+            <path d="M34 66 L10 88 Q24 92 40 78" fill="#2b2331" stroke="#fffdf7" stroke-width="3"></path>
+            <ellipse cx="56" cy="58" rx="26" ry="20" fill="#2b2331" stroke="#fffdf7" stroke-width="3"></ellipse>
+            <circle cx="78" cy="38" r="14" fill="#2b2331" stroke="#fffdf7" stroke-width="3"></circle>
+            <path d="M90 35 L103 40 L90 45 Z" fill="var(--k-accent)" stroke="#fffdf7" stroke-width="2"></path>
+            <circle cx="82" cy="35" r="3.4" fill="#d63b2f"></circle><circle cx="83" cy="34" r="1.1" fill="#fff"></circle>
+            <path d="M42 54 Q56 44 68 54 Q58 68 42 62 Z" fill="#463a52"></path>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <!-- torn paper edge -->
+    <svg viewBox="0 0 1200 26" preserveAspectRatio="none" style="display:block;width:100%;height:24px;margin-bottom:-2px"><path d="M0 26 L0 12 Q30 2 60 12 T120 10 T180 14 T240 8 T300 14 T360 10 T420 15 T480 9 T540 13 T600 8 T660 14 T720 10 T780 15 T840 9 T900 13 T960 9 T1020 14 T1080 10 T1140 13 T1200 9 L1200 26 Z" fill="#faf6ee"></path></svg>
+  </div>
+
+  <!-- marquee -->
+  <div style="background:var(--k-accent);color:#faf6ee;border-top:2px solid var(--k-ink);border-bottom:2px solid var(--k-ink);overflow:hidden;padding:12px 0;white-space:nowrap">
+    <div ref="{{ marqueeEl }}" style="display:inline-flex;animation:koelMarquee 24s linear infinite">
+      <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:16px;letter-spacing:.06em;padding-right:24px">curated by coffee lovers ~ eleven estates across India ~ hand roasted in Gurugram ~ fair to farmers ~ roasted to order ~ the bird approves ~&nbsp;</span>
+      <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:16px;letter-spacing:.06em;padding-right:24px">curated by coffee lovers ~ eleven estates across India ~ hand roasted in Gurugram ~ fair to farmers ~ roasted to order ~ the bird approves ~&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- ===== best sellers ===== -->
+  <div id="shop" style="padding:clamp(44px,6vw,90px) clamp(14px,5vw,72px) clamp(52px,7vw,104px);position:relative">
+    <div style="position:absolute;left:clamp(14px,5vw,72px);bottom:14px;font-family:'Caveat',cursive;font-size:19px;color:#6b6154;transform:rotate(-1deg)">psst — the No 07 sold out twice last month. just saying. ✎</div>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(30px,4.4vw,58px);font-weight:300;letter-spacing:-.02em">the <strong style="font-weight:800">house favourites</strong></div>
+      <div style="font-family:'Caveat',cursive;font-size:21px;color:var(--k-accent);transform:rotate(-1.5deg)">numbered the day they joined the family ↴</div>
+    </div>
+    <div style="position:absolute;right:clamp(20px,8vw,140px);top:clamp(90px,10vw,150px);width:120px;height:112px;border-radius:50%;border:8px solid rgba(138,75,46,.1);box-shadow:inset 0 0 0 3px rgba(138,75,46,.06);transform:rotate(6deg) scaleX(1.08);pointer-events:none"></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(270px,100%),1fr));gap:clamp(14px,2vw,24px);margin-top:30px">
+      <sc-for list="{{ products }}" as="p" hint-placeholder-count="3">
+        <div data-reveal style="background:{{ p.bg }};border:2px solid var(--k-ink);border-radius:18px;padding:clamp(20px,2.2vw,30px);display:flex;flex-direction:column;gap:14px;position:relative;transition:transform .35s cubic-bezier(.2,.6,.2,1)" style-hover="transform:translateY(-6px) rotate(-.5deg)">
+          <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(-3deg);width:92px;height:22px;background:#f0e1aa;opacity:.85;border-radius:2px"></div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:15px;background:var(--k-ink);color:#faf6ee;border-radius:999px;padding:6px 14px">No {{ p.no }}</div>
+            <div style="font-family:'Caveat',cursive;font-size:19px;color:var(--k-ink);transform:rotate(2deg)">{{ p.scribble }}</div>
+          </div>
+          <div style="display:flex;justify-content:center;padding:4px 0;animation:koelBob 4.2s ease-in-out infinite">
+            <div style="position:relative"><svg width="120" height="164" viewBox="0 0 120 164"><rect x="18" y="22" width="84" height="132" rx="8" fill="var(--k-ink)"></rect><path d="M18 22 Q60 6 102 22 L102 34 Q60 19 18 34 Z" fill="{{ p.lid }}"></path><rect x="30" y="62" width="60" height="62" rx="6" fill="#faf6ee"></rect><path d="M50 106c3-9 10-13 16-13-1.5 8-5.5 14-13 14l-3 4" fill="none" stroke="{{ p.lid }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><rect x="38" y="115" width="44" height="2.4" rx="1.2" fill="#d9cfbc"></rect><rect x="44" y="76" width="32" height="2.4" rx="1.2" fill="#d9cfbc"></rect><text x="60" y="146" text-anchor="middle" font-family="'Bricolage Grotesque',sans-serif" font-weight="600" font-size="8" letter-spacing="2" fill="#faf6ee">KOEL COFFEE CO.</text></svg><div style="position:absolute;top:72px;left:50%;transform:translateX(-50%);font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px;color:var(--k-ink)">No {{ p.no }}</div></div>
+          </div>
+          <div>
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:21px;letter-spacing:-.01em">{{ p.name }}</div>
+            <div style="font-size:12.5px;font-weight:500;color:#4d4437;margin-top:3px">{{ p.origin }}</div>
+            <div style="font-size:14.5px;margin-top:10px;font-style:italic">{{ p.notes }}</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--k-ink);padding-top:14px;margin-top:auto;gap:10px;flex-wrap:wrap">
+            <div><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:19px">{{ p.priceLabel }}</span><span style="font-size:11.5px;color:#4d4437"> / 250 g</span></div>
+            <button onClick="{{ p.add }}" style="cursor:pointer;font:inherit;font-weight:600;font-size:13px;background:var(--k-ink);color:#faf6ee;border:none;border-radius:999px;padding:12px 20px;min-height:44px" style-hover="background:var(--k-accent)">Into the basket</button>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- ===== JOURNEY MAP (scroll-drawn) ===== -->
+  <div id="journey" ref="{{ mapWrap }}" style="background:#fffdf7;border-top:2px solid var(--k-ink);border-bottom:2px solid var(--k-ink);padding:clamp(44px,6vw,90px) clamp(14px,5vw,72px);position:relative;overflow:hidden">
+    <div style="max-width:760px">
+      <div style="font-family:'Caveat',cursive;font-size:22px;color:var(--k-accent);transform:rotate(-1.5deg)">from the hills to your tumbler —</div>
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(30px,4.4vw,56px);font-weight:300;line-height:1.05;letter-spacing:-.02em;margin-top:8px">every bean makes a <strong style="font-weight:800">2,100 km journey</strong> north. scroll it.</div>
+    </div>
+    <div style="position:relative;margin-top:clamp(20px,3.5vw,44px)">
+      <!-- dashed route behind the photos; draws on scroll, bird follows -->
+      <svg class="koel-route-svg" viewBox="0 0 1200 300" style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:100%;height:auto;overflow:visible;pointer-events:none;z-index:0">
+        <path ref="{{ mapPath }}" d="M30 200 C 220 60, 420 250, 620 130 S 980 220, 1170 90" fill="none" stroke="var(--k-accent)" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 12" opacity=".8"></path>
+        <g ref="{{ mapBird }}" style="will-change:transform">
+          <g transform="translate(-20 -34) scale(0.36)">
+            <path d="M34 66 L10 88 Q24 92 40 78" fill="#2b2331"></path>
+            <ellipse cx="56" cy="58" rx="26" ry="20" fill="#2b2331"></ellipse>
+            <circle cx="78" cy="38" r="14" fill="#2b2331"></circle>
+            <path d="M90 35 L103 40 L90 45 Z" fill="var(--k-accent)"></path>
+            <circle cx="82" cy="35" r="3.4" fill="#d63b2f"></circle>
+            <path d="M42 54 Q56 44 68 54 Q58 68 42 62 Z" fill="#463a52"></path>
+          </g>
+        </g>
+      </svg>
+      <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:clamp(14px,2.4vw,28px);align-items:start">
+        <div data-reveal style="background:#fffdf7;border:2px solid var(--k-ink);padding:10px 10px 12px;transform:rotate(-1.8deg);position:relative;box-shadow:3px 4px 0 rgba(30,53,42,.18)">
+          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-4deg);width:74px;height:20px;background:#f0e1aa;opacity:.85;z-index:2"></div>
+          <div style="position:absolute;top:8px;left:8px;z-index:2;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:12px;background:var(--k-ink);color:#faf6ee;border-radius:999px;padding:4px 11px">01</div>
+          <div style="aspect-ratio:4/3;overflow:hidden"><img crossorigin="anonymous" alt="Coffee estate in the Chikmagalur hills" src="https://images.unsplash.com/photo-1633437805600-2c58bf56663c?fm=jpg&q=72&w=900&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover"></div>
+          <div style="font-family:'Caveat',cursive;font-size:19px;margin-top:8px">Chikmagalur — the estate, 1,450 m up</div>
+        </div>
+        <div data-reveal style="background:#fffdf7;border:2px solid var(--k-ink);padding:10px 10px 12px;transform:rotate(1.4deg) translateY(clamp(0px,2.5vw,34px));position:relative;box-shadow:3px 4px 0 rgba(30,53,42,.18)">
+          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(3deg);width:74px;height:20px;background:#f0e1aa;opacity:.85;z-index:2"></div>
+          <div style="position:absolute;top:8px;left:8px;z-index:2;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:12px;background:var(--k-ink);color:#faf6ee;border-radius:999px;padding:4px 11px">02</div>
+          <div style="aspect-ratio:4/3;overflow:hidden"><img crossorigin="anonymous" alt="Hand-picked red coffee cherries" src="https://images.unsplash.com/photo-1670758611084-e216510c5433?fm=jpg&q=72&w=900&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover"></div>
+          <div style="font-family:'Caveat',cursive;font-size:19px;margin-top:8px">picked red, by hand, pass after pass</div>
+        </div>
+        <div data-reveal style="background:#fffdf7;border:2px solid var(--k-ink);padding:10px 10px 12px;transform:rotate(-1.2deg);position:relative;box-shadow:3px 4px 0 rgba(30,53,42,.18)">
+          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-3deg);width:74px;height:20px;background:#f0e1aa;opacity:.85;z-index:2"></div>
+          <div style="position:absolute;top:8px;left:8px;z-index:2;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:12px;background:var(--k-ink);color:#faf6ee;border-radius:999px;padding:4px 11px">03</div>
+          <div style="aspect-ratio:4/3;overflow:hidden"><img crossorigin="anonymous" alt="The roasting drum at work in Gurugram" src="https://images.unsplash.com/photo-1518164483967-d6d558aa44df?fm=jpg&q=72&w=900&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover"></div>
+          <div style="font-family:'Caveat',cursive;font-size:19px;margin-top:8px">2,100 km north — the Gurugram drum sings</div>
+        </div>
+        <div data-reveal style="background:#fffdf7;border:2px solid var(--k-ink);padding:10px 10px 12px;transform:rotate(1.8deg) translateY(clamp(0px,2vw,26px));position:relative;box-shadow:3px 4px 0 rgba(30,53,42,.18)">
+          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(4deg);width:74px;height:20px;background:#f0e1aa;opacity:.85;z-index:2"></div>
+          <div style="position:absolute;top:8px;left:8px;z-index:2;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:12px;background:var(--k-ink);color:#faf6ee;border-radius:999px;padding:4px 11px">04</div>
+          <div style="aspect-ratio:4/3;overflow:hidden"><img crossorigin="anonymous" alt="Slow pour-over into the glass" src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?fm=jpg&q=72&w=900&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover"></div>
+          <div style="font-family:'Caveat',cursive;font-size:19px;margin-top:8px">in your tumbler by Thursday</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== story: taped polaroids ===== -->
+  <div id="story" style="display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(44px,6vw,90px) clamp(14px,5vw,72px)">
+    <div style="flex:1 1 340px">
+      <div data-reveal style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(30px,4.6vw,62px);font-weight:300;line-height:1.05;letter-spacing:-.02em;text-wrap:balance"><strong style="font-weight:800">III generations</strong> of one stubborn, coffee-mad family</div>
+      <div data-reveal style="font-size:15px;line-height:1.7;color:#4d4437;margin-top:18px;max-width:520px">Our grandfather roasted the first batch on a hand-crank drum in Chikmagalur in 1972 and rang a bicycle bell when it was ready. His daughter built the estate partnerships. Her daughter brought the drum north to Gurugram — and cups every lot from eleven estates across India before it ships. The bell still rings on Tuesdays.</div>
+      <div data-reveal style="font-family:'Caveat',cursive;font-size:22px;color:var(--k-accent);margin-top:16px;transform:rotate(-1deg)">"nothing happens without coffee" — house rule, since 1972</div>
+    </div>
+    <div style="flex:1 1 300px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,2vw,18px)">
+      <div data-reveal style="background:#fffdf7;border:2px solid var(--k-ink);padding:10px 10px 14px;transform:rotate(-2deg);position:relative;box-shadow:3px 4px 0 rgba(30,53,42,.18)">
+        <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-4deg);width:76px;height:20px;background:#f0e1aa;opacity:.85"></div>
+        <div style="aspect-ratio:1;overflow:hidden"><img crossorigin="anonymous" alt="Beans in the roasting drum" src="https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?fm=jpg&q=72&w=800&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover"></div>
+        <div style="font-family:'Caveat',cursive;font-size:19px;text-align:center;margin-top:8px">the drum, mid-song</div>
+      </div>
+      <div data-reveal style="background:#fffdf7;border:2px solid var(--k-ink);padding:10px 10px 14px;transform:rotate(1.6deg) translateY(18px);position:relative;box-shadow:3px 4px 0 rgba(30,53,42,.18)">
+        <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(3deg);width:76px;height:20px;background:#f0e1aa;opacity:.85"></div>
+        <div style="aspect-ratio:1;overflow:hidden"><img crossorigin="anonymous" alt="Fresh grounds falling from the grinder" src="https://images.unsplash.com/photo-1537130508299-46ab547b4be3?fm=jpg&q=72&w=800&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover"></div>
+        <div style="font-family:'Caveat',cursive;font-size:19px;text-align:center;margin-top:8px">ground the morning it ships</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- subscription band -->
+  <div id="subscribe" style="background:var(--k-hero);border-top:2px solid var(--k-ink);border-bottom:2px solid var(--k-ink);padding:clamp(40px,6vw,80px) clamp(14px,5vw,72px);display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,44px);align-items:center;position:relative">
+    <div style="flex:1.2 1 340px">
+      <div style="font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:var(--k-ink);color:#faf6ee;display:inline-block;border-radius:999px;padding:6px 14px">Subscriptions</div>
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(28px,4vw,54px);font-weight:300;line-height:1.05;letter-spacing:-.02em;margin-top:14px">save <strong style="font-weight:800">10%</strong>, skip whenever, cancel anytime</div>
+      <div style="font-size:15px;line-height:1.7;margin-top:14px;max-width:520px">Weekly, fortnightly or monthly. Choose your own coffees, or let us send the lot the family is arguing about that month.</div>
+      <a href="#shop" style="display:inline-flex;align-items:center;margin-top:22px;background:var(--k-ink);color:#faf6ee;border-radius:999px;padding:15px 30px;font-weight:600;font-size:15px;min-height:44px" style-hover="background:var(--k-accent)">Get started</a>
+    </div>
+    <div style="flex:1 1 280px;display:flex;justify-content:center">
+      <div data-reveal style="background:#fffdf7;border:2px solid var(--k-ink);padding:12px 12px 16px;transform:rotate(1.6deg);position:relative;box-shadow:4px 5px 0 rgba(30,53,42,.18);width:min(100%,360px)">
+        <div style="position:absolute;top:-11px;left:24px;transform:rotate(-5deg);width:84px;height:22px;background:#f0e1aa;opacity:.85"></div>
+        <div style="position:absolute;top:-11px;right:24px;transform:rotate(4deg);width:84px;height:22px;background:#f0e1aa;opacity:.85"></div>
+        <div style="aspect-ratio:4/3;overflow:hidden"><img crossorigin="anonymous" alt="Coffee bags packed for subscription" src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?fm=jpg&q=72&w=1000&auto=format&fit=crop" style="width:100%;height:100%;object-fit:cover"></div>
+        <div style="font-family:'Caveat',cursive;font-size:20px;text-align:center;margin-top:10px">this month's box — packed by Meera ✎</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- grind picker -->
+  <div id="grind" style="padding:clamp(40px,6vw,80px) clamp(14px,5vw,72px)">
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(26px,3.6vw,46px);font-weight:300;letter-spacing:-.02em">how do you <strong style="font-weight:800">brew</strong>?</div>
+    <div style="font-family:'Caveat',cursive;font-size:21px;color:var(--k-accent);margin-top:6px;transform:rotate(-1deg)">pick one — we grind to match, the morning we ship ↓</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
+      <sc-for list="{{ grinds }}" as="g" hint-placeholder-count="8">
+        <button onClick="{{ g.pick }}" style="cursor:pointer;font:inherit;font-weight:600;font-size:14px;background:{{ g.bg }};color:{{ g.fg }};border:2px solid var(--k-ink);border-radius:999px;padding:12px 22px;min-height:44px;transition:transform .25s ease" style-hover="transform:translateY(-3px)">{{ g.name }}</button>
+      </sc-for>
+    </div>
+    <div style="margin-top:18px;border:2px solid var(--k-ink);border-radius:14px;background:#fffdf7;padding:18px 22px;max-width:640px;font-size:14.5px;line-height:1.65;position:relative">
+      <div style="position:absolute;top:-11px;right:22px;transform:rotate(4deg);width:70px;height:20px;background:#f0e1aa;opacity:.85"></div>
+      <strong style="font-family:'Bricolage Grotesque',sans-serif">{{ grindName }}</strong> — {{ grindDesc }}
+    </div>
+  </div>
+
+  <!-- testimonials: sticky notes -->
+  <div style="background:var(--k-ink);color:#faf6ee;padding:clamp(40px,6vw,80px) clamp(14px,5vw,72px)">
+    <div style="display:flex;align-items:baseline;gap:18px;flex-wrap:wrap">
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(26px,3.6vw,46px);font-weight:300;letter-spacing:-.02em">notes from the <strong style="font-weight:800">regulars</strong></div>
+      <div style="font-size:13.5px;font-weight:600;background:var(--k-accent);border-radius:999px;padding:6px 14px">★ 4.8 · 400+ reviews</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:clamp(14px,2vw,22px);margin-top:30px">
+      <sc-for list="{{ quotes }}" as="q" hint-placeholder-count="3">
+        <div data-reveal style="background:{{ q.bg }};color:var(--k-ink);padding:24px 22px 20px;transform:rotate({{ q.tilt }});position:relative;box-shadow:4px 5px 0 rgba(0,0,0,.25)">
+          <sc-if value="{{ q.pin }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:18px;height:18px;border-radius:50%;background:#d63b2f;border:2px solid rgba(0,0,0,.35);box-shadow:0 2px 3px rgba(0,0,0,.35)"></div>
+          </sc-if>
+          <sc-if value="{{ q.tape }}" hint-placeholder-val="{{ true }}">
+            <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-3deg);width:80px;height:20px;background:rgba(240,225,170,.9)"></div>
+          </sc-if>
+          <div style="font-family:'Caveat',cursive;font-size:23px;line-height:1.35;font-weight:500">“{{ q.text }}”</div>
+          <div style="font-size:12.5px;font-weight:600;margin-top:14px">{{ q.who }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- newsletter + footer with mascot -->
+  <div style="border-top:2px solid var(--k-ink);padding:clamp(36px,5vw,64px) clamp(14px,5vw,72px);display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,56px);position:relative">
+    <div style="flex:1.2 1 340px">
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(24px,3vw,38px);font-weight:300;letter-spacing:-.02em">get <strong style="font-weight:800">15% off</strong> your first order</div>
+      <div style="font-family:'Caveat',cursive;font-size:20px;color:#6b6154;margin-top:6px">roast-day alerts, new lots, and general goss. worth it — promise.</div>
+      <div style="display:flex;gap:10px;margin-top:18px;max-width:440px;flex-wrap:wrap">
+        <input placeholder="Email address" style="flex:1;min-width:200px;font:inherit;font-size:14px;border:2px solid var(--k-ink);border-radius:999px;padding:13px 20px;background:#fff;color:var(--k-ink);outline:none;min-height:44px">
+        <button onClick="{{ signup }}" style="cursor:pointer;font:inherit;font-weight:600;font-size:14px;background:var(--k-accent);color:#faf6ee;border:2px solid var(--k-ink);border-radius:999px;padding:13px 24px;min-height:44px" style-hover="background:var(--k-ink)">{{ signupLabel }}</button>
+      </div>
+    </div>
+    <div style="flex:1 1 220px;display:flex;gap:clamp(24px,4vw,64px);font-size:13.5px;line-height:2.1">
+      <div><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;margin-bottom:6px">Navigate</div><a href="#shop" style="display:block;color:var(--k-ink);padding:2px 0">Store</a><a href="#journey" style="display:block;color:var(--k-ink);padding:2px 0">The journey</a><a href="#subscribe" style="display:block;color:var(--k-ink);padding:2px 0">Subscriptions</a><a href="#grind" style="display:block;color:var(--k-ink);padding:2px 0">Grind guide</a></div>
+      <div><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;margin-bottom:6px">Visit</div><div>Koel Coffee Co.<br>Galleria Market, Sector 28<br>Gurugram 122002</div></div>
+    </div>
+    <!-- peeking mascot -->
+    <div style="position:absolute;right:clamp(16px,6vw,90px);top:-46px;width:88px;pointer-events:none">
+      <svg width="88" height="76" viewBox="0 0 120 100" style="overflow:visible">
+        <g style="animation:koelBob 3.4s ease-in-out infinite">
+          <path d="M34 66 L10 88 Q24 92 40 78" fill="#2b2331"></path>
+          <ellipse cx="56" cy="58" rx="26" ry="20" fill="#2b2331"></ellipse>
+          <circle cx="78" cy="38" r="14" fill="#2b2331"></circle>
+          <path d="M90 35 L103 40 L90 45 Z" fill="var(--k-accent)"></path>
+          <circle cx="82" cy="35" r="3.4" fill="#d63b2f"></circle><circle cx="83" cy="34" r="1.1" fill="#fff"></circle>
+          <ellipse cx="82" cy="35" rx="4" ry="4" fill="#2b2331" style="transform-origin:82px 35px;animation:koelBlink 5s ease-in-out infinite"></ellipse>
+          <path d="M42 54 Q56 44 68 54 Q58 68 42 62 Z" fill="#463a52"></path>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div style="border-top:2px solid var(--k-ink);padding:14px clamp(14px,5vw,72px);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;color:#6b6154;position:relative">
+    <span>© 2026 Koel Coffee Co. · roasted with stubbornness in Gurugram since 1972</span>
+    <div style="position:absolute;left:38%;top:-26px;width:84px;height:78px;border-radius:50%;border:7px solid rgba(138,75,46,.1);transform:rotate(-5deg) scaleX(1.07);pointer-events:none"></div>
+    <span style="font-family:'Caveat',cursive;font-size:16px">koel — the bird that sings for coffee</span>
+  </div>
+
+  <!-- cart drawer -->
+  <div onClick="{{ toggleCart }}" style="position:fixed;inset:0;z-index:70;background:rgba(30,53,42,.45);transition:opacity .3s ease;opacity:{{ cartOverlayOpacity }};pointer-events:{{ cartPointer }}"></div>
+  <div style="position:fixed;top:0;right:0;bottom:0;z-index:71;width:min(92vw,380px);background:var(--k-paper);border-left:2px solid var(--k-ink);transform:translateX({{ cartX }});transition:transform .35s cubic-bezier(.4,0,.1,1);display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:2px solid var(--k-ink)">
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:19px">your basket <span style="font-weight:400;font-size:14px;color:#6b6154">{{ cartCount }}</span></div>
+      <button onClick="{{ toggleCart }}" aria-label="Close basket" style="cursor:pointer;font:inherit;background:none;border:none;font-size:20px;color:var(--k-ink);min-width:44px;min-height:44px">✕</button>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:6px 22px">
+      <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:36px 0;text-align:center;color:#6b6154;font-size:13.5px;line-height:1.8">
+          <svg width="92" height="80" viewBox="0 0 120 100" style="overflow:visible;margin-bottom:6px"><g style="animation:koelBob 3s ease-in-out infinite"><path d="M34 66 L10 88 Q24 92 40 78" fill="#2b2331"></path><ellipse cx="56" cy="58" rx="26" ry="20" fill="#2b2331"></ellipse><circle cx="78" cy="38" r="14" fill="#2b2331"></circle><path d="M90 35 L103 40 L90 45 Z" fill="#e2603a"></path><circle cx="82" cy="35" r="3.4" fill="#d63b2f"></circle><path d="M42 54 Q56 44 68 54 Q58 68 42 62 Z" fill="#463a52"></path></g></svg>
+          <br>The koel is waiting.<br><span style="font-family:'Caveat',cursive;font-size:18px">she recommends the No 07, loudly.</span>
+        </div>
+      </sc-if>
+      <sc-for list="{{ cartLines }}" as="l" hint-placeholder-count="0">
+        <div style="display:flex;gap:12px;align-items:center;padding:16px 0;border-bottom:1px solid #e2d9c8">
+          <div style="width:34px;height:34px;border-radius:999px;background:{{ l.bg }};border:2px solid var(--k-ink);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:11px;flex:none">{{ l.no }}</div>
+          <div style="flex:1">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:14.5px">{{ l.name }}</div>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
+              <button onClick="{{ l.dec }}" style="cursor:pointer;font:inherit;border:2px solid var(--k-ink);background:none;border-radius:999px;width:32px;height:32px;line-height:1;color:var(--k-ink)">−</button>
+              <span style="font-weight:600;font-size:13px">{{ l.qty }}</span>
+              <button onClick="{{ l.inc }}" style="cursor:pointer;font:inherit;border:2px solid var(--k-ink);background:none;border-radius:999px;width:32px;height:32px;line-height:1;color:var(--k-ink)">+</button>
+            </div>
+          </div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:14px;white-space:nowrap">{{ l.lineTotal }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="padding:18px 22px;border-top:2px solid var(--k-ink)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:#6b6154">Subtotal</span><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px">{{ cartTotal }}</span></div>
+      <div style="font-size:11.5px;color:#6b6154;margin:6px 0 14px">{{ shippingNote }}</div>
+      <button style="width:100%;cursor:pointer;font:inherit;font-weight:600;font-size:14.5px;background:var(--k-accent);color:#faf6ee;border:2px solid var(--k-ink);border-radius:999px;padding:15px;min-height:48px" style-hover="background:var(--k-ink)">Take it home →</button>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;palette&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;mint&quot;,&quot;options&quot;:[&quot;mint&quot;,&quot;butter&quot;,&quot;sky&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;marqueeSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:24,&quot;min&quot;:8,&quot;max&quot;:60,&quot;step&quot;:2,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;showAnnouncement&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    ['marqueeEl','heroEl','mapWrap','mapPath','mapBird'].forEach((k)=>{ this[k]=React.createRef(); });
+    this.state = { cart: [], cartOpen: false, grind: 0, signedUp: false };
+    this.disposed = false;
+    this.PRODUCTS = [
+      { id:'gshot', no:'01', name:'The G-Shot', origin:'House espresso blend · Attikan + Malabar + Araku', notes:'dark chocolate ~ jaggery ~ dried fig', scribble:'the Gurugram shot ✎', price:700, bg:'#f2df9c', lid:'#1e352a', short:'house blend · espresso' },
+      { id:'attikan', no:'03', name:'Attikan Estate', origin:'Biligiri Hills · washed · medium roast', notes:'dark chocolate ~ hazelnut ~ jaggery', scribble:'the founder\u2019s favourite', price:640, bg:'#c6e7cd', lid:'#e2603a', short:'Biligiris · washed' },
+      { id:'baarbara', no:'05', name:'Baarbara Estate', origin:'Chikmagalur · washed · medium roast', notes:'milk chocolate ~ butterscotch ~ almond', scribble:'crowd-pleaser, always', price:660, bg:'#e8d9f2', lid:'#7a5a94', short:'Chikmagalur · washed' },
+      { id:'ratnagiri', no:'07', name:'Ratnagiri Anaerobic', origin:'Chikmagalur · anaerobic natural · medium', notes:'ripe cherry ~ cacao nib ~ rose', scribble:'the bird\u2019s pick!', price:820, bg:'#f6d9d2', lid:'#c94f2c', short:'Chikmagalur · natural' },
+      { id:'malabar', no:'09', name:'Monsooned Malabar AA', origin:'Kerala coast · monsooned · dark roast', notes:'earthy ~ pipe tobacco ~ zero acidity', scribble:'monsoon magic ☔', price:590, bg:'#f4c99b', lid:'#8a4b2e', short:'Malabar · monsooned' },
+      { id:'araku', no:'12', name:'Araku Valley Organic', origin:'Eastern Ghats · washed · light roast · 90+ cup score', notes:'jasmine ~ citrus ~ honey', scribble:'our head roaster\u2019s pick', price:720, bg:'#cfe0f2', lid:'#3f6f52', short:'Araku · organic' }
+    ];
+    this.GRINDS = [
+      { name:'Beans', desc:'Wholebeans — you bring the grinder, we bring the roast-day freshness.' },
+      { name:'Aeropress', desc:'Medium-fine, like table salt. Versatile and forgiving.' },
+      { name:'Espresso', desc:'Fine, almost powdery — builds the pressure home machines need.' },
+      { name:'Filter machine', desc:'Medium, like sand. Even extraction over longer brew times.' },
+      { name:'Stovetop', desc:'Medium-fine — rich and strong without choking the moka pot.' },
+      { name:'Cafetiere', desc:'Coarse, like sea salt, so nothing slips through the mesh.' },
+      { name:'V60', desc:'Medium-fine, slightly finer than drip — balances flow and clarity.' },
+      { name:'South Indian filter', desc:'Fine-ish grind for the classic brass filter — slow, strong, and worth the wait.' }
+    ];
+    this.QUOTES = [
+      { text:'Quite simply the best filter coffee that has ever come out of my kitchen.', who:'Priya N. · Bengaluru', bg:'#f6d9d2', tilt:'-1.6deg', tape:true, pin:false },
+      { text:'Ordered Monday, roasted Tuesday, brewing Thursday. Ridiculous freshness.', who:'Arjun M. · Gurugram', bg:'#c6e7cd', tilt:'1.2deg', tape:false, pin:true },
+      { text:'The G-Shot converted my entire office away from instant. No going back.', who:'Sarah K. · Delhi', bg:'#cfe0f2', tilt:'-.8deg', tape:true, pin:false }
+    ];
+  }
+
+  fmt(n){ return '₹' + n.toLocaleString('en-IN'); }
+
+  renderVals(){
+    const cart = this.state.cart;
+    const count = cart.reduce((s,l)=>s+l.qty,0);
+    const total = cart.reduce((s,l)=>s+l.qty*l.price,0);
+    const g = this.GRINDS[this.state.grind];
+    return {
+      marqueeEl:this.marqueeEl, heroEl:this.heroEl, mapWrap:this.mapWrap, mapPath:this.mapPath, mapBird:this.mapBird,
+      showAnnouncement: this.props.showAnnouncement ?? true,
+      products: this.PRODUCTS.map((p)=>({ ...p, priceLabel:this.fmt(p.price), add:()=>this.add(p) })),
+      grinds: this.GRINDS.map((x,i)=>({ name:x.name, bg: i===this.state.grind ? 'var(--k-ink)' : '#fffdf7', fg: i===this.state.grind ? '#faf6ee' : 'var(--k-ink)', pick:()=>this.setState({grind:i}) })),
+      grindName: g.name, grindDesc: g.desc,
+      quotes: this.QUOTES,
+      cartCount: count,
+      cartTotal: this.fmt(total),
+      cartEmpty: cart.length===0,
+      cartLines: cart.map((l)=>({ ...l, lineTotal:this.fmt(l.qty*l.price), inc:()=>this.qty(l.id,1), dec:()=>this.qty(l.id,-1) })),
+      shippingNote: total>=2000 ? 'Free shipping unlocked — the bird sings!' : this.fmt(2000-total)+' away from free shipping',
+      cartX: this.state.cartOpen ? '0' : '102%',
+      cartOverlayOpacity: this.state.cartOpen ? '1' : '0',
+      cartPointer: this.state.cartOpen ? 'auto' : 'none',
+      toggleCart: ()=>this.setState((s)=>({cartOpen:!s.cartOpen})),
+      signup: ()=>this.setState({signedUp:true}),
+      signupLabel: this.state.signedUp ? 'You\u2019re in!' : 'Join the flock'
+    };
+  }
+
+  add(p){
+    this.setState((s)=>{
+      const cart=s.cart.slice();
+      const ex=cart.find((l)=>l.id===p.id);
+      if(ex) ex.qty+=1; else cart.push({ id:p.id, no:p.no, name:p.name, price:p.price, bg:p.bg, qty:1 });
+      return { cart, cartOpen:true };
+    });
+  }
+  qty(id,d){
+    this.setState((s)=>{
+      let cart=s.cart.slice();
+      const l=cart.find((x)=>x.id===id);
+      if(l){ l.qty+=d; if(l.qty<=0) cart=cart.filter((x)=>x.id!==id); }
+      return { cart };
+    });
+  }
+
+  componentDidMount(){
+    this.reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.applyTheme();
+    this.initReveals();
+    this.initMap();
+    this.initStickers();
+  }
+  componentDidUpdate(){ this.applyTheme(); }
+  componentWillUnmount(){
+    this.disposed = true;
+    if (this.mapRaf) cancelAnimationFrame(this.mapRaf);
+    if (this.revIo) this.revIo.disconnect();
+    window.removeEventListener('pointermove', this.onDragMove);
+    window.removeEventListener('pointerup', this.onDragEnd);
+  }
+
+  applyTheme(){
+    const PAL = {
+      mint:   { hero:'#c6e7cd', accent:'#e2603a', ink:'#1e352a' },
+      butter: { hero:'#f2df9c', accent:'#c94f2c', ink:'#2f2513' },
+      sky:    { hero:'#bfdcef', accent:'#e2603a', ink:'#1f2c38' }
+    };
+    const p = PAL[this.props.palette] || PAL.mint;
+    const rs = document.documentElement.style;
+    rs.setProperty('--k-hero', p.hero);
+    rs.setProperty('--k-accent', p.accent);
+    rs.setProperty('--k-ink', p.ink);
+    if (this.marqueeEl.current) this.marqueeEl.current.style.animationDuration = (this.props.marqueeSpeed ?? 24) + 's';
+  }
+
+  root(){ return this.heroEl.current ? this.heroEl.current.parentElement : document.body; }
+
+  // ---- entrance reveals ----
+  initReveals(tries){
+    if (this.disposed) return;
+    const root = this.root();
+    if (!root){ if((tries||0)<20) setTimeout(()=>this.initReveals((tries||0)+1),200); return; }
+    if (this.reduce) return;
+    this.revIo = new IntersectionObserver((es)=>{ es.forEach((e)=>{ if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.translate='0 0'; this.revIo.unobserve(e.target); } }); },{ threshold:0.1 });
+    const prime = ()=>{
+      if (this.disposed) return;
+      root.querySelectorAll('[data-reveal]').forEach((el)=>{
+        if (el.__rev) return; el.__rev = true;
+        el.style.opacity='0'; el.style.translate='0 16px';
+        el.style.transition='opacity .65s ease, translate .65s cubic-bezier(.2,.6,.2,1)';
+        this.revIo.observe(el);
+      });
+    };
+    prime(); setTimeout(prime,500); setTimeout(prime,1500);
+  }
+
+  // ---- journey: route draws on scroll, bird follows ----
+  initMap(tries){
+    if (this.disposed) return;
+    const path = this.mapPath.current, bird = this.mapBird.current, wrap = this.mapWrap.current;
+    if (!path || !bird || !wrap){ if((tries||0)<40) setTimeout(()=>this.initMap((tries||0)+1),150); return; }
+    const L = path.getTotalLength();
+    path.style.strokeDasharray = '10 12';
+    const place = (p)=>{
+      const eased = p<0?0:p>1?1:p;
+      const pt = path.getPointAtLength(L*eased);
+      const ahead = path.getPointAtLength(Math.min(L, L*eased+2));
+      const flip = ahead.x < pt.x ? -1 : 1;
+      bird.setAttribute('transform','translate('+pt.x+' '+(pt.y-8)+') scale('+flip+' 1)');
+      // draw-in: overlay dash pattern via stroke-dashoffset trick on a duplicate is complex; instead reveal via clip length
+      path.style.strokeDasharray = (L*eased)+' '+L;
+    };
+    if (this.reduce){ place(1); path.style.strokeDasharray='10 12'; return; }
+    let smooth=0, target=0;
+    const read = ()=>{
+      const r = wrap.getBoundingClientRect();
+      const ih = window.innerHeight;
+      return Math.max(0, Math.min(1, (ih*0.85 - r.top) / (r.height*0.9)));
+    };
+    const loop = ()=>{
+      if (this.disposed) return;
+      this.mapRaf = requestAnimationFrame(loop);
+      const r = wrap.getBoundingClientRect();
+      if (r.bottom<0 || r.top>window.innerHeight) return;
+      target = read();
+      smooth += (target-smooth)*0.08;
+      place(smooth);
+    };
+    loop();
+  }
+
+  // ---- draggable stickers (positions persist) ----
+  initStickers(tries){
+    if (this.disposed) return;
+    const root = this.root();
+    const els = root ? root.querySelectorAll('[data-sticker]') : [];
+    if (!els.length){ if((tries||0)<20) setTimeout(()=>this.initStickers((tries||0)+1),250); return; }
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem('koel-stickers-v2')||'{}'); } catch(e){}
+    this.drag = null;
+    els.forEach((el)=>{
+      const id = el.getAttribute('data-sticker');
+      const pos = saved[id];
+      if (pos) el.style.translate = pos[0]+'px '+pos[1]+'px';
+      el.__pos = pos ? pos.slice() : [0,0];
+      el.addEventListener('pointerdown', (e)=>{
+        e.preventDefault();
+        el.setPointerCapture(e.pointerId);
+        el.style.cursor='grabbing'; el.style.zIndex='30'; el.style.animationPlayState='paused';
+        this.drag = { el, id, sx:e.clientX, sy:e.clientY, ox:el.__pos[0], oy:el.__pos[1] };
+      });
+    });
+    this.onDragMove = (e)=>{
+      if (!this.drag) return;
+      const d = this.drag;
+      d.el.__pos = [d.ox + (e.clientX-d.sx), d.oy + (e.clientY-d.sy)];
+      d.el.style.translate = d.el.__pos[0]+'px '+d.el.__pos[1]+'px';
+    };
+    this.onDragEnd = ()=>{
+      if (!this.drag) return;
+      const d = this.drag; this.drag = null;
+      d.el.style.cursor='grab'; d.el.style.animationPlayState='';
+      try {
+        const cur = JSON.parse(localStorage.getItem('koel-stickers-v2')||'{}');
+        cur[d.id] = d.el.__pos;
+        localStorage.setItem('koel-stickers-v2', JSON.stringify(cur));
+      } catch(e){}
+    };
+    window.addEventListener('pointermove', this.onDragMove);
+    window.addEventListener('pointerup', this.onDragEnd);
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Karla:wght@300;400;500&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#f7f5f0}a{color:inherit;text-decoration:none}a:hover{opacity:.7}
+::selection{background:#9e3b25;color:#f7f5f0}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:3;opacity:.045;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* every illustration hides its strokes until the JS hand-draw takes over;
+   the 3.4s safety animation restores them if scripting never arrives */
+@keyframes kSafety{to{opacity:1}}
+.k-art :is(path,circle,ellipse,line):not([data-steam]){opacity:0;animation:kSafety .9s ease 3.4s forwards}
+.k-art text{opacity:0;animation:kSafety .9s ease 3.4s forwards}
+[data-krev]{animation:kSafety .9s ease 3s forwards}
+.k-hanko{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;background:#9e3b25;color:#f7f5f0;font-family:'Noto Serif JP',serif;font-weight:400;font-size:15px;line-height:1;border-radius:3px;transform:rotate(-4deg);box-shadow:0 1px 0 rgba(41,37,33,.15)}
+.k-colophon{position:absolute;top:0;bottom:0;right:clamp(14px,1.6vw,26px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;pointer-events:none}
+.k-kanji{writing-mode:vertical-rl;font-family:'Noto Serif JP',serif;font-weight:300;font-size:19px;letter-spacing:.6em;color:rgba(41,37,33,.55)}
+@media (max-width:1199px){.k-colophon{display:none}}
+@media (hover:hover) and (pointer:fine){
+  .kanso-nav-item{position:relative;display:inline-block;padding-bottom:3px}
+  .kanso-nav-item::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:#292521;transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.22,.61,.36,1)}
+  .kanso-nav-item:hover::after{transform:scaleX(1)}
+
+  .kanso-link{position:relative;display:inline-flex;align-items:baseline;padding-bottom:3px}
+  .kanso-link::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:currentColor;opacity:.55;transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.22,.61,.36,1)}
+  .kanso-link:hover::after{transform:scaleX(1)}
+  .kanso-arrow{display:inline-block;margin-left:2px;transition:transform .4s cubic-bezier(.22,.61,.36,1)}
+  .kanso-link:hover .kanso-arrow{transform:translateX(4px)}
+
+  .kanso-card{transition:transform .5s cubic-bezier(.22,.61,.36,1),box-shadow .5s ease}
+  .kanso-card:hover{transform:translateY(-4px);box-shadow:0 22px 40px -30px rgba(41,37,33,.35)}
+  .kanso-card .kanso-link{transition:color .45s ease}
+  .kanso-card:hover .kanso-link{color:#9e3b25}
+
+  .kanso-tile{cursor:pointer}
+  .kanso-tile:hover [data-steam]{opacity:.95 !important}
+
+  .k-jrow{transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+  .k-jrow:hover{transform:translateX(7px)}
+
+  .kanso-btn{transition:box-shadow .4s ease,filter .4s ease}
+  .kanso-btn:hover{filter:brightness(1.06);box-shadow:0 10px 26px -18px rgba(41,37,33,.4)}
+}
+@media (prefers-reduced-motion: reduce){
+  .kanso-nav-item::after,.kanso-link::after,.kanso-arrow,.kanso-card,.kanso-btn,.k-jrow{transition:none !important}
+  [data-krev]{opacity:1 !important;transform:none !important;filter:none !important;animation:none !important}
+  .k-art :is(path,circle,ellipse,line,text){opacity:1 !important;animation:none !important;stroke-dasharray:none !important;stroke-dashoffset:0 !important}
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+</helmet>
+
+<div data-screen-label="KANSO" style="background:#f7f5f0;color:#292521;font-family:'Karla',sans-serif;font-weight:300;min-height:100vh">
+
+  <a href="Index.dc.html" style="display:block;background:#292521;color:#f7f5f0;text-align:center;padding:9px;font-size:11px;letter-spacing:.26em;text-transform:uppercase">← Back to all directions</a>
+
+  <!-- nav -->
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:clamp(18px,3vw,28px) clamp(20px,5vw,64px);border-bottom:1px solid #e2ddd3">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.42em;font-weight:400">K A N S O</div>
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(20px,3vw,44px);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase">
+      <span class="kanso-nav-item">Coffee</span><span class="kanso-nav-item">Goods</span><span class="kanso-nav-item">Process</span><span class="kanso-nav-item">Journal</span><span class="kanso-nav-item">Cart — 0</span>
+    </div>
+  </div>
+
+  <!-- hero -->
+  <div id="k-hero" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(32px,5vw,72px);padding:clamp(60px,8.5vw,112px) clamp(20px,5vw,64px) clamp(60px,7.5vw,104px);align-items:center;position:relative;overflow:hidden">
+    <div class="kanso-parallax" data-depth="0.012" style="position:absolute;top:-420px;right:-360px;pointer-events:none">
+    <svg class="k-art" data-drift="true" width="980" height="980" viewBox="0 0 980 980" fill="none" stroke="#292521" style="opacity:.05;pointer-events:none">
+      <circle cx="490" cy="490" r="460" stroke-width="1"></circle>
+      <circle cx="490" cy="490" r="352" stroke-width="1" stroke-dasharray="2 12"></circle>
+      <path d="M490 30 C 260 240, 260 740, 490 950" stroke-width="1"></path>
+    </svg>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:clamp(20px,3vw,32px);position:relative">
+      <div id="k-eyebrow" data-krev style="opacity:0;font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:#8b8378;line-height:2">Kan·so&nbsp;·&nbsp;<span style="font-family:'Noto Serif JP',serif;letter-spacing:.18em">簡素</span>&nbsp;—&nbsp;simplicity; the omission of the non-essential</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(44px,6vw,80px);line-height:1.04;font-weight:300">
+        <span style="display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em"><span class="k-hline" data-krev style="display:block;opacity:0;will-change:transform">Coffee, reduced</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em"><span class="k-hline" data-krev style="display:block;opacity:0;will-change:transform">to its <em style="font-weight:300">essentials.</em></span></span>
+      </div>
+      <div id="k-sub" data-krev style="opacity:0;font-size:15.5px;line-height:1.8;color:#5c554b;max-width:440px">Single-origin lots, roasted in twelve-kilogram batches and rested seven days. Water at 93&nbsp;°C. Everything else, we leave out.</div>
+      <div id="k-ctas" data-krev style="opacity:0;display:flex;flex-wrap:wrap;gap:16px;margin-top:8px">
+        <span class="kanso-btn" style="padding:15px 34px;background:#292521;color:#f7f5f0;font-size:12px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer">Shop the roast</span>
+        <span class="kanso-btn" style="padding:15px 34px;border:1px solid #292521;font-size:12px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer">Our process</span>
+      </div>
+    </div>
+    <div class="kanso-parallax" data-depth="0.03" style="display:flex;align-items:center;justify-content:center">
+      <svg id="k-hero-art" class="k-art" viewBox="0 0 360 420" fill="none" stroke="#292521" stroke-width="1.1" style="width:100%;height:auto;max-width:360px">
+        <!-- ensō — one breath, left open -->
+        <g transform="translate(0,-10)">
+        <path data-d="0" data-dur="2100" d="M 57.1 153.9 A 150 150 0 1 0 116.6 104.1" stroke-width="6.5" stroke-linecap="round" style="stroke:rgba(41,37,33,.9)"></path>
+        <path data-d="60" data-dur="2100" d="M 55.6 170 A 146 146 0 1 0 132.1 105.8" stroke-width="2.6" stroke-linecap="round" style="stroke:rgba(41,37,33,.45)"></path>
+        <path data-d="120" data-dur="2100" d="M 61.8 139.7 A 153 153 0 1 0 107.2 102.9" stroke-width="1.3" stroke-linecap="round" style="stroke:rgba(41,37,33,.32)"></path>
+        </g>
+        <!-- the bean -->
+        <ellipse data-d="1050" data-dur="1400" cx="180" cy="240" rx="62" ry="92" transform="rotate(18 180 240)"></ellipse>
+        <path data-d="1500" data-dur="1100" d="M158 162 C 196 202, 158 278, 202 318"></path>
+        <line data-d="2050" data-dur="900" x1="60" y1="404" x2="300" y2="404" stroke="#d8d2c6"></line>
+        <text id="k-hero-caption" x="180" y="398" text-anchor="middle" font-family="Karla" font-size="10" letter-spacing="3" fill="#8b8378" stroke="none">ARABICA · TYPICA · N° 14</text>
+      </svg>
+    </div>
+    <div class="k-colophon" id="k-colophon" data-krev style="opacity:0">
+      <span class="k-kanji">簡素</span>
+      <span class="k-hanko" id="k-hero-hanko" data-krev style="opacity:0">簡</span>
+    </div>
+  </div>
+
+  <!-- featured coffees -->
+  <div data-scene="cards" style="padding:0 clamp(20px,5vw,64px) clamp(56px,7vw,96px);display:flex;flex-direction:column;gap:clamp(28px,4vw,44px)">
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div data-kline style="height:1px;background:#e2ddd3;transform-origin:left"></div>
+      <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px">
+        <div data-kp style="font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3vw,34px);font-weight:400">This season's roast</div>
+        <div data-kp data-kd="260" class="kanso-link" style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8b8378">All coffee <span class="kanso-arrow">→</span></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:#e2ddd3;border:1px solid #e2ddd3">
+      <div class="kanso-card" data-kcard style="background:#f7f5f0;padding:clamp(28px,3vw,40px) clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:20px">
+        <svg class="k-art" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#292521" stroke-width="1"><ellipse cx="32" cy="32" rx="14" ry="21" transform="rotate(20 32 32)"></ellipse><path d="M27 15 C 36 24, 27 40, 37 49"></path></svg>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px">Yirgacheffe Idido</div>
+        <div style="font-size:12px;line-height:2;letter-spacing:.06em;color:#5c554b">ETHIOPIA · 2,050 M<br>WASHED · HEIRLOOM<br>JASMINE / BERGAMOT / APRICOT</div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #e2ddd3;padding-top:16px;margin-top:auto"><span style="font-size:14px">250 g — ₹850</span><span class="kanso-link" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer">Add <span class="kanso-arrow">→</span></span></div>
+      </div>
+      <div class="kanso-card" data-kcard style="background:#f7f5f0;padding:clamp(28px,3vw,40px) clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:20px">
+        <svg class="k-art" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#292521" stroke-width="1"><circle cx="32" cy="32" r="20"></circle><circle cx="32" cy="32" r="9" stroke="#a89e8e"></circle></svg>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px">Huila La Palma</div>
+        <div style="font-size:12px;line-height:2;letter-spacing:.06em;color:#5c554b">COLOMBIA · 1,750 M<br>HONEY · PINK BOURBON<br>PANELA / PLUM / COCOA NIB</div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #e2ddd3;padding-top:16px;margin-top:auto"><span style="font-size:14px">250 g — ₹750</span><span class="kanso-link" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer">Add <span class="kanso-arrow">→</span></span></div>
+      </div>
+      <div class="kanso-card" data-kcard style="background:#f7f5f0;padding:clamp(28px,3vw,40px) clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:20px">
+        <svg class="k-art" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#292521" stroke-width="1"><path d="M14 20 H50 L42 48 H22 Z"></path><line x1="10" y1="52" x2="54" y2="52" stroke="#a89e8e"></line></svg>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px">Kiamugumo AB</div>
+        <div style="font-size:12px;line-height:2;letter-spacing:.06em;color:#5c554b">KENYA · 1,850 M<br>WASHED · SL28 / SL34<br>BLACKCURRANT / TOMATO / CANE</div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #e2ddd3;padding-top:16px;margin-top:auto"><span style="font-size:14px">250 g — ₹950</span><span class="kanso-link" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer">Add <span class="kanso-arrow">→</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- process band -->
+  <div data-scene="process" style="background:#efeae0;padding:clamp(48px,7vw,88px) clamp(20px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(32px,5vw,72px);position:relative;overflow:hidden">
+    <div class="kanso-parallax" data-depth="0.01" style="position:absolute;bottom:-340px;left:-260px;pointer-events:none">
+    <svg class="k-art" data-drift="true" width="720" height="720" viewBox="0 0 720 720" fill="none" stroke="#292521" style="opacity:.055;pointer-events:none">
+      <path d="M360 40 C 160 80, 60 280, 100 460 C 130 590, 250 670, 400 676" stroke-width="1.4"></path>
+      <ellipse cx="360" cy="360" rx="150" ry="230" transform="rotate(24 360 360)" stroke-width="1" stroke-dasharray="2 10"></ellipse>
+    </svg>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px;position:relative">
+      <div data-kp data-klabel style="font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:#8b8378">The process</div>
+      <div data-kp data-kd="180" style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,44px);line-height:1.15;font-weight:300">Four decisions,<br>made carefully.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(24px,3vw,40px) clamp(32px,4vw,56px)">
+      <div style="display:flex;flex-direction:column">
+        <div data-kline style="height:1px;background:#d8d2c6;transform-origin:left"></div>
+        <div data-kp data-kd="300" style="display:flex;flex-direction:column;gap:10px;padding-top:18px"><div style="font-size:11px;letter-spacing:.28em;color:#8b8378">01</div><div style="font-family:'Cormorant Garamond',serif;font-size:21px">Source</div><div style="font-size:13.5px;line-height:1.7;color:#5c554b">Direct relationships with nine farms. We pay 2.4× the commodity price, every harvest.</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column">
+        <div data-kline style="height:1px;background:#d8d2c6;transform-origin:left"></div>
+        <div data-kp data-kd="440" style="display:flex;flex-direction:column;gap:10px;padding-top:18px"><div style="font-size:11px;letter-spacing:.28em;color:#8b8378">02</div><div style="font-family:'Cormorant Garamond',serif;font-size:21px">Roast</div><div style="font-size:13.5px;line-height:1.7;color:#5c554b">Profiled by hand on a 1958 Probat. First crack logged to the second; development held under 18%.</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column">
+        <div data-kline style="height:1px;background:#d8d2c6;transform-origin:left"></div>
+        <div data-kp data-kd="580" style="display:flex;flex-direction:column;gap:10px;padding-top:18px"><div style="font-size:11px;letter-spacing:.28em;color:#8b8378">03</div><div style="font-family:'Cormorant Garamond',serif;font-size:21px">Rest</div><div style="font-size:13.5px;line-height:1.7;color:#5c554b">Seven days of degassing before any bag ships. Roast date printed, never a best-before.</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column">
+        <div data-kline style="height:1px;background:#d8d2c6;transform-origin:left"></div>
+        <div data-kp data-kd="720" style="display:flex;flex-direction:column;gap:10px;padding-top:18px"><div style="font-size:11px;letter-spacing:.28em;color:#8b8378">04</div><div style="font-family:'Cormorant Garamond',serif;font-size:21px">Brew</div><div style="font-size:13.5px;line-height:1.7;color:#5c554b">A recipe card in every box: dose, ratio, temperature, time. Nothing left to guesswork.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- accessories -->
+  <div data-scene="goods" style="padding:clamp(56px,7vw,96px) clamp(20px,5vw,64px);display:flex;flex-direction:column;gap:clamp(28px,4vw,44px)">
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div data-kline style="height:1px;background:#e2ddd3;transform-origin:left"></div>
+      <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px">
+        <div data-kp style="font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3vw,34px);font-weight:400">Tools of the ritual</div>
+        <div data-kp data-kd="260" class="kanso-link" style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8b8378">All goods <span class="kanso-arrow">→</span></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(20px,3vw,32px)">
+      <div class="kanso-tile" data-kcard style="display:flex;flex-direction:column;gap:16px">
+        <div style="background:#efeae0;height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden">
+          <svg class="k-art" width="200" height="240" viewBox="0 0 200 240" fill="none" stroke="#292521" stroke-width="1.1">
+            <path d="M60 110 C 56 148, 60 178, 70 196 L 130 196 C 140 178, 144 148, 140 110 Z"></path>
+            <path d="M60 110 C 72 100, 128 100, 140 110"></path>
+            <path d="M96 96 L 104 96 L 104 108 L 96 108 Z" stroke="#a89e8e"></path>
+            <path d="M62 122 C 40 118, 26 96, 30 74 C 40 82, 52 88, 64 90" stroke="#292521"></path>
+            <path d="M70 96 C 60 74, 84 62, 130 66 C 140 68, 142 78, 136 84" stroke="#a89e8e"></path>
+            <line x1="40" y1="216" x2="160" y2="216" stroke="#d8d2c6"></line>
+          </svg>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:12px;font-size:13.5px"><span>Gooseneck kettle, matte steel</span><span style="color:#8b8378">₹6,500</span></div>
+      </div>
+      <div class="kanso-tile" data-kcard style="display:flex;flex-direction:column;gap:16px">
+        <div style="background:#efeae0;height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden">
+          <svg class="k-art" width="200" height="240" viewBox="0 0 200 240" fill="none" stroke="#292521" stroke-width="1.1">
+            <path d="M52 92 L 148 92 L 112 160 L 88 160 Z"></path>
+            <line x1="66" y1="100" x2="98" y2="152" stroke="#d8d2c6"></line>
+            <line x1="82" y1="96" x2="106" y2="140" stroke="#d8d2c6"></line>
+            <path d="M88 160 L 88 172 L 112 172 L 112 160" stroke="#a89e8e"></path>
+            <ellipse cx="100" cy="196" rx="42" ry="8" stroke="#a89e8e"></ellipse>
+            <path d="M100 118 C 96 124, 104 130, 100 136" stroke="#a89e8e"></path>
+            <line x1="40" y1="216" x2="160" y2="216" stroke="#d8d2c6"></line>
+          </svg>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:12px;font-size:13.5px"><span>Ceramic dripper, unglazed</span><span style="color:#8b8378">₹3,400</span></div>
+      </div>
+      <div class="kanso-tile" data-kcard style="display:flex;flex-direction:column;gap:16px">
+        <div style="background:#efeae0;height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden">
+          <svg class="k-art" width="200" height="240" viewBox="0 0 200 240" fill="none" stroke="#292521" stroke-width="1.1">
+            <path d="M62 108 C 62 152, 74 176, 100 176 C 126 176, 138 152, 138 108 Z"></path>
+            <ellipse cx="100" cy="108" rx="38" ry="9"></ellipse>
+            <path data-steam="true" d="M96 84 C 92 76, 100 70, 96 62" stroke="#a89e8e" stroke-linecap="round"></path>
+            <path data-steam="true" d="M110 84 C 106 76, 114 70, 110 62" stroke="#a89e8e" stroke-linecap="round"></path>
+            <ellipse cx="100" cy="198" rx="30" ry="6" stroke="#d8d2c6"></ellipse>
+            <line x1="40" y1="216" x2="160" y2="216" stroke="#d8d2c6"></line>
+          </svg>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:12px;font-size:13.5px"><span>Stoneware cup, 180 ml</span><span style="color:#8b8378">₹2,200</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- subscription -->
+  <div data-scene="subscribe" style="margin:0 clamp(20px,5vw,64px);padding:clamp(36px,6vw,72px);display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center;position:relative;overflow:hidden">
+    <div data-kbord="t" style="position:absolute;top:0;left:0;right:0;height:1px;background:#292521;transform-origin:left"></div>
+    <div data-kbord="r" style="position:absolute;top:0;right:0;bottom:0;width:1px;background:#292521;transform-origin:top"></div>
+    <div data-kbord="b" style="position:absolute;bottom:0;left:0;right:0;height:1px;background:#292521;transform-origin:right"></div>
+    <div data-kbord="l" style="position:absolute;top:0;left:0;bottom:0;width:1px;background:#292521;transform-origin:bottom"></div>
+    <svg class="k-art kanso-parallax" data-drift="true" data-depth="0.016" data-base-transform="translate(-50%,-50%)" width="620" height="620" viewBox="0 0 620 620" fill="none" stroke="#292521" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.05;pointer-events:none">
+      <circle cx="310" cy="310" r="290" stroke-width="1"></circle>
+      <circle cx="310" cy="310" r="225" stroke-width="1" stroke-dasharray="2 12"></circle>
+      <circle cx="310" cy="310" r="160" stroke-width="1"></circle>
+    </svg>
+    <svg class="k-art" width="54" height="54" viewBox="0 0 54 54" fill="none" stroke="#292521" style="position:relative"><path data-dur="1600" d="M 10.6 15.5 A 20 20 0 1 0 18.5 8.9" stroke-width="2.4" stroke-linecap="round" style="stroke:rgba(41,37,33,.85)"></path></svg>
+    <div data-kp data-kd="500" style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,38px);font-weight:300;text-wrap:balance;position:relative">A new origin, every fortnight.</div>
+    <div data-kp data-kd="680" style="font-size:14.5px;line-height:1.7;color:#5c554b;max-width:480px;position:relative">Shipped the day it finishes resting — never a day sooner. Pause or cancel any time. From ₹1,500 per delivery.</div>
+    <span data-kp data-kd="860" class="kanso-btn" style="padding:15px 38px;background:#292521;color:#f7f5f0;font-size:12px;letter-spacing:.18em;text-transform:uppercase;margin-top:6px;cursor:pointer;position:relative">Start a subscription</span>
+  </div>
+
+  <!-- journal + press -->
+  <div data-scene="journal" style="padding:clamp(56px,7vw,96px) clamp(20px,5vw,64px) clamp(48px,6vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(40px,5vw,72px);position:relative;overflow:hidden">
+    <div class="kanso-parallax" data-depth="0.011" style="position:absolute;top:-160px;right:-200px;pointer-events:none">
+    <svg class="k-art" data-drift="true" width="520" height="520" viewBox="0 0 520 520" fill="none" stroke="#292521" style="opacity:.05;pointer-events:none">
+      <path d="M260 60 C 150 150, 150 370, 260 460" stroke-width="1"></path>
+      <path d="M260 60 C 370 150, 370 370, 260 460" stroke-width="1" stroke-dasharray="2 10"></path>
+      <path d="M210 180 C 240 210, 240 310, 214 344" stroke-width="1"></path>
+    </svg>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div data-kp data-klabel style="font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:#8b8378">Journal</div>
+      <div style="display:flex;flex-direction:column">
+        <div data-kline style="height:1px;background:#e2ddd3;transform-origin:left"></div>
+        <div class="k-jrow" data-kp data-kd="220" style="padding:18px 0;display:flex;justify-content:space-between;gap:24px"><span style="font-family:'Cormorant Garamond',serif;font-size:20px">Why we hold development under 18%</span><span style="font-size:12px;color:#8b8378;white-space:nowrap">No. 14</span></div>
+        <div data-kline style="height:1px;background:#e2ddd3;transform-origin:left"></div>
+        <div class="k-jrow" data-kp data-kd="360" style="padding:18px 0;display:flex;justify-content:space-between;gap:24px"><span style="font-family:'Cormorant Garamond',serif;font-size:20px">A visit to Idido, Yirgacheffe</span><span style="font-size:12px;color:#8b8378;white-space:nowrap">No. 13</span></div>
+        <div data-kline style="height:1px;background:#e2ddd3;transform-origin:left"></div>
+        <div class="k-jrow" data-kp data-kd="500" style="padding:18px 0;display:flex;justify-content:space-between;gap:24px"><span style="font-family:'Cormorant Garamond',serif;font-size:20px">The case for a coarser grind</span><span style="font-size:12px;color:#8b8378;white-space:nowrap">No. 12</span></div>
+        <div data-kline style="height:1px;background:#e2ddd3;transform-origin:left"></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div data-kp data-klabel style="font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:#8b8378">As seen in</div>
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div data-kp data-kd="260" style="font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;line-height:1.6;color:#5c554b">“The most disciplined roasting programme we have tasted this year.”</div>
+        <div data-kp data-kd="420" style="display:flex;gap:clamp(20px,3vw,36px);font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:#8b8378;flex-wrap:wrap"><span>Monocle</span><span>Kinfolk</span><span>Sprudge</span><span>Standart</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div data-scene="footer" style="border-top:1px solid #e2ddd3;padding:clamp(24px,4vw,36px) clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8b8378">
+    <span data-kp style="display:inline-flex;align-items:center;gap:14px"><span style="font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:.42em;color:#292521">K A N S O</span><span class="k-hanko" data-kstamp style="width:24px;height:24px;font-size:12px">簡</span></span>
+    <span data-kp data-kd="160">Shipping across India · Wholesale · Contact</span>
+    <span data-kp data-kd="320">Kyoto · © 2026</span>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const start = () => {
+      if (!window.anime) { setTimeout(start, 120); return; }
+      const anime = window.anime;
+      const root = document.querySelector('[data-screen-label]');
+      if (!root || root.dataset.animated) return;
+      root.dataset.animated = '1';
+      const fine = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+      // ---------- the hand-drawn line language ----------
+      // Every illustration (svg.k-art) keeps its strokes invisible (CSS) until
+      // prepared here with dash offsets, then draws itself in slowly when its
+      // moment arrives. Nothing renders fully-formed.
+      const SHAPES = 'path,circle,ellipse,line';
+      const prepArt = (svg) => {
+        if (svg._kEls) return svg._kEls;
+        const els = [];
+        svg.querySelectorAll(SHAPES).forEach((el) => {
+          el.style.animation = 'none';
+          if (el.dataset.steam) { el.style.opacity = '0'; return; }
+          let l = 0;
+          try { l = el.getTotalLength(); } catch (e) { l = 0; }
+          if (!l) { el.style.opacity = '1'; return; }
+          el._kLen = l;
+          el.style.strokeDasharray = l;
+          el.style.strokeDashoffset = l;
+          el.style.opacity = '1';
+          els.push(el);
+        });
+        svg.querySelectorAll('text').forEach((t) => { t.style.animation = 'none'; t.style.opacity = '0'; });
+        svg._kEls = els;
+        return els;
+      };
+      const drawArt = (svg, opts) => {
+        const o = opts || {};
+        if (svg.dataset.drawn && !o.force) return;
+        svg.dataset.drawn = '1';
+        const els = prepArt(svg);
+        let maxEnd = 0;
+        els.forEach((el, i) => {
+          anime.remove(el);
+          const l = el._kLen;
+          el.style.strokeDashoffset = l;
+          const delay = (o.base || 0) + (el.dataset.d !== undefined ? parseFloat(el.dataset.d) : i * (o.step !== undefined ? o.step : 150));
+          const dur = el.dataset.dur !== undefined ? parseFloat(el.dataset.dur) : (o.dur || 1600);
+          if (delay + dur > maxEnd) maxEnd = delay + dur;
+          anime({ targets: el, strokeDashoffset: [l, 0], duration: dur, delay: delay, easing: o.easing || 'easeInOutQuart' });
+        });
+        svg.querySelectorAll('text').forEach((t) => {
+          anime.remove(t);
+          anime({ targets: t, opacity: [0, 1], duration: 900, delay: Math.max(0, maxEnd - 500), easing: 'easeOutCubic' });
+        });
+      };
+      // Prepare every illustration up front so no stroke ever pops in complete.
+      root.querySelectorAll('svg.k-art').forEach(prepArt);
+
+      // ---------- ambient life: drift + steam ----------
+      root.querySelectorAll('[data-drift]').forEach((el, i) => {
+        if (el.style.transform) {
+          anime({ targets: el, opacity: [0.035, 0.075], duration: 7000 + i * 900, direction: 'alternate', loop: true, easing: 'easeInOutSine' });
+        } else {
+          anime({ targets: el, rotate: [-1.5, 1.5], duration: 14000 + i * 2000, direction: 'alternate', loop: true, easing: 'easeInOutSine' });
+        }
+      });
+      root.querySelectorAll('[data-steam]').forEach((el, i) => {
+        anime({ targets: el, translateY: [2, -4], opacity: [0.25, 0.9], duration: 2600, direction: 'alternate', loop: true, delay: 900 + i * 420, easing: 'easeInOutSine' });
+      });
+
+      // ---------- hero: the page takes its first breath ----------
+      const un = (el) => { if (el) el.style.animation = 'none'; };
+      const rise = (el, delay, dur) => {
+        if (!el) return;
+        un(el);
+        anime({ targets: el, opacity: [0, 1], translateY: [14, 0], duration: dur || 1000, delay: delay || 0, easing: 'easeOutCubic' });
+      };
+      const heroArt = root.querySelector('#k-hero-art');
+      if (heroArt) {
+        drawArt(heroArt, { base: 420, easing: 'easeInOutQuart' });
+        anime({ targets: heroArt, translateY: [-4, 4], duration: 5200, direction: 'alternate', loop: true, easing: 'easeInOutSine' });
+      }
+      const heroDecor = root.querySelector('#k-hero .kanso-parallax svg.k-art');
+      if (heroDecor) drawArt(heroDecor, { base: 300, dur: 2600, step: 320, easing: 'easeInOutSine' });
+      const hlines = root.querySelectorAll('.k-hline');
+      hlines.forEach((el) => { un(el); el.style.transform = 'translateY(104%)'; el.style.opacity = '1'; });
+      anime({ targets: hlines, translateY: ['104%', '0%'], filter: ['blur(8px)', 'blur(0px)'], duration: 1500, delay: anime.stagger(170, { start: 380 }), easing: 'easeOutExpo' });
+      rise(root.querySelector('#k-eyebrow'), 180, 1100);
+      rise(root.querySelector('#k-sub'), 950, 1000);
+      rise(root.querySelector('#k-ctas'), 1150, 1000);
+      const colophon = root.querySelector('#k-colophon');
+      if (colophon) { un(colophon); anime({ targets: colophon, opacity: [0, 1], duration: 1400, delay: 1900, easing: 'easeOutCubic' }); }
+      const heroHanko = root.querySelector('#k-hero-hanko');
+      if (heroHanko) { un(heroHanko); anime({ targets: heroHanko, opacity: [0, 1], scale: [1.6, 1], rotate: -4, duration: 480, delay: 2400, easing: 'easeOutCubic' }); }
+
+      // ---------- scenes: art-directed scroll choreography ----------
+      const scenes = Array.from(root.querySelectorAll('[data-scene]'));
+      scenes.forEach((sc) => {
+        sc.querySelectorAll('[data-kline]').forEach((el) => { el.style.transform = 'scaleX(0)'; });
+        sc.querySelectorAll('[data-kp]').forEach((el) => { el.style.opacity = '0'; });
+        sc.querySelectorAll('[data-kstamp]').forEach((el) => { el.style.opacity = '0'; });
+        sc.querySelectorAll('[data-kbord="t"],[data-kbord="b"]').forEach((el) => { el.style.transform = 'scaleX(0)'; });
+        sc.querySelectorAll('[data-kbord="r"],[data-kbord="l"]').forEach((el) => { el.style.transform = 'scaleY(0)'; });
+        sc.querySelectorAll('[data-kcard]').forEach((card) => {
+          Array.from(card.children).forEach((ch) => { ch.style.opacity = '0'; });
+        });
+      });
+      const playScene = (sc) => {
+        if (sc.dataset.played) return;
+        sc.dataset.played = '1';
+        const lines = sc.querySelectorAll('[data-kline]');
+        if (lines.length) anime({ targets: lines, scaleX: [0, 1], duration: 1300, delay: anime.stagger(140), easing: 'easeInOutQuart' });
+        const bt = sc.querySelector('[data-kbord="t"]'), br = sc.querySelector('[data-kbord="r"]'),
+              bb = sc.querySelector('[data-kbord="b"]'), bl = sc.querySelector('[data-kbord="l"]');
+        if (bt) {
+          anime({ targets: bt, scaleX: [0, 1], duration: 520, easing: 'easeInOutSine' });
+          anime({ targets: br, scaleY: [0, 1], duration: 520, delay: 400, easing: 'easeInOutSine' });
+          anime({ targets: bb, scaleX: [0, 1], duration: 520, delay: 800, easing: 'easeInOutSine' });
+          anime({ targets: bl, scaleY: [0, 1], duration: 520, delay: 1200, easing: 'easeInOutSine' });
+        }
+        sc.querySelectorAll('[data-kp]').forEach((el, i) => {
+          const d = 140 + (el.dataset.kd !== undefined ? parseFloat(el.dataset.kd) : i * 120);
+          if (el.dataset.klabel !== undefined) {
+            anime({ targets: el, opacity: [0, 1], letterSpacing: ['.55em', '.3em'], translateY: [8, 0], duration: 1300, delay: d, easing: 'easeOutCubic' });
+          } else {
+            anime({ targets: el, opacity: [0, 1], translateY: [20, 0], duration: 950, delay: d, easing: 'easeOutCubic' });
+          }
+        });
+        sc.querySelectorAll('[data-kstamp]').forEach((el) => {
+          anime({ targets: el, opacity: [0, 1], scale: [1.6, 1], rotate: -4, duration: 480, delay: 620, easing: 'easeOutCubic' });
+        });
+        sc.querySelectorAll('[data-kcard]').forEach((card, ci) => {
+          Array.from(card.children).forEach((ch, k) => {
+            anime({ targets: ch, opacity: [0, 1], translateY: [16, 0], duration: 950, delay: 280 + ci * 160 + k * 90, easing: 'easeOutCubic' });
+          });
+          card.querySelectorAll('svg.k-art').forEach((s) => drawArt(s, { base: 380 + ci * 200, dur: 1700, step: 190, easing: 'easeInOutQuart' }));
+        });
+        sc.querySelectorAll('svg.k-art').forEach((s, j) => {
+          if (!s.dataset.drawn) drawArt(s, { base: 260 + j * 240, dur: 2100, step: 200, easing: 'easeInOutSine' });
+        });
+      };
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((en) => { if (en.isIntersecting) { io.unobserve(en.target); playScene(en.target); } });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+        scenes.forEach((sc) => io.observe(sc));
+      } else {
+        scenes.forEach(playScene);
+      }
+
+      // ---------- micro-interactions: desktop pointers only ----------
+      if (fine) {
+        const parallaxEls = Array.from(root.querySelectorAll('.kanso-parallax'));
+        if (parallaxEls.length) {
+          let mx = 0, my = 0, ticking = false;
+          const applyParallax = () => {
+            ticking = false;
+            parallaxEls.forEach((el) => {
+              const depth = parseFloat(el.getAttribute('data-depth')) || 0.02;
+              const dx = mx * depth * 260;
+              const dy = my * depth * 260;
+              const base = el.getAttribute('data-base-transform');
+              el.style.transform = base ? base + ' translate(' + dx.toFixed(2) + 'px, ' + dy.toFixed(2) + 'px)' : 'translate(' + dx.toFixed(2) + 'px, ' + dy.toFixed(2) + 'px)';
+            });
+          };
+          const onMove = (e) => {
+            mx = (e.clientX / window.innerWidth) - 0.5;
+            my = (e.clientY / window.innerHeight) - 0.5;
+            if (!ticking) { ticking = true; window.requestAnimationFrame(applyParallax); }
+          };
+          window.addEventListener('mousemove', onMove, { passive: true });
+          applyParallax();
+        }
+
+        root.querySelectorAll('.kanso-btn').forEach((btn) => {
+          btn.addEventListener('mouseenter', () => {
+            anime({ targets: btn, letterSpacing: '0.24em', duration: 420, easing: 'easeOutQuad' });
+          });
+          btn.addEventListener('mousemove', (e) => {
+            const r = btn.getBoundingClientRect();
+            const relX = e.clientX - (r.left + r.width / 2);
+            const relY = e.clientY - (r.top + r.height / 2);
+            const mag = 0.1;
+            const tx = Math.max(-6, Math.min(6, relX * mag));
+            const ty = Math.max(-6, Math.min(6, relY * mag));
+            btn.style.transform = 'translateX(' + tx.toFixed(2) + 'px) translateY(' + ty.toFixed(2) + 'px)';
+          }, { passive: true });
+          btn.addEventListener('mouseleave', () => {
+            anime({ targets: btn, letterSpacing: '0.18em', translateX: 0, translateY: 0, duration: 460, easing: 'easeOutCubic' });
+          });
+        });
+
+        // a goods sketch quietly re-draws itself under the cursor
+        root.querySelectorAll('.kanso-tile').forEach((tile) => {
+          const s = tile.querySelector('svg.k-art');
+          if (!s) return;
+          let busy = false;
+          tile.addEventListener('mouseenter', () => {
+            if (busy || !s.dataset.drawn) return;
+            busy = true;
+            drawArt(s, { force: true, base: 0, dur: 900, step: 70, easing: 'easeInOutSine' });
+            setTimeout(() => { busy = false; }, 1600);
+          });
+        });
+      }
+    };
+    start();
+  }
+}
+</script>
+</body>
+</html>

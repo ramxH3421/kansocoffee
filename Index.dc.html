@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Karla:wght@300;400;500&family=Libre+Caslon+Text:ital,wght@0,400;1,400&family=Archivo:wght@400;500;600&family=Space+Mono&family=Unbounded:wght@600;800&family=JetBrains+Mono&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#12100e}a{color:inherit;text-decoration:none}
+@media (hover:hover) and (pointer:fine){ .dir-card{transition:transform .45s cubic-bezier(.22,.61,.36,1),box-shadow .45s ease} .dir-card:hover{transform:translateY(-4px) !important;box-shadow:0 16px 44px rgba(0,0,0,.45)} }
+@keyframes idxKoelBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes idxKoelSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.idx-koel-bird{animation:idxKoelBob 3.2s ease-in-out infinite}
+.idx-koel-stamp{animation:idxKoelSpin 18s linear infinite;top:14px;right:14px;width:54px;height:54px}
+.idx-koel-stamp svg{width:100%;height:100%;display:block}
+@media (max-width:480px){ .idx-koel-stamp{width:42px;height:42px;top:12px;right:12px} }
+@media (prefers-reduced-motion: reduce){ .dir-card{transition:none} .idx-koel-bird,.idx-koel-stamp{animation:none} }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+</helmet>
+
+<div data-screen-label="Directions Index" style="background:#12100e;color:#ece7dd;font-family:'Karla',sans-serif;font-weight:300;min-height:100vh">
+
+  <!-- header -->
+  <div style="padding:clamp(48px,8vw,96px) clamp(20px,5vw,64px) clamp(36px,5vw,64px);display:flex;flex-direction:column;gap:20px;max-width:1100px;margin:0 auto">
+    <div style="font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;color:#9a8d7c">Brand direction studies · Artisan coffee</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5.5vw,68px);line-height:1.08;font-weight:300;text-wrap:balance">Seven ways to sell the same obsession.</div>
+    <div style="font-size:15.5px;line-height:1.75;color:#b3a897;max-width:560px">Each direction is a full landing page — open one to explore it on desktop or mobile. Same coffee, seven different beliefs about how it should be sold.</div>
+  </div>
+
+  <!-- cards -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;padding:0 clamp(20px,5vw,64px) clamp(56px,8vw,96px);max-width:1100px;margin:0 auto;box-sizing:border-box">
+
+    <!-- KOEL -->
+    <a href="Koel%20v2.dc.html" class="dir-card" style="display:flex;flex-direction:column;background:#c6e7cd;color:#1e352a;min-height:420px" style-hover="transform:translateY(-4px);box-shadow:0 16px 44px rgba(0,0,0,.45)">
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:36px 0;border-bottom:1px solid #a9cfb2;position:relative;overflow:hidden">
+        <div class="idx-koel-stamp" style="position:absolute;transform:rotate(-6deg)">
+          <svg viewBox="0 0 118 118"><defs><path id="idxKoelArc" d="M59,59 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"></path></defs><circle cx="59" cy="59" r="56" fill="#e2603a" stroke="#1e352a" stroke-width="2"></circle><text font-family="'Bricolage Grotesque',sans-serif" font-size="12" font-weight="600" letter-spacing="2.4" fill="#faf6ee"><textPath href="#idxKoelArc">ROASTED FRESH · EVERY TUESDAY ·</textPath></text><path d="M48 68c3-9 10-14 17-14-1.5 8.5-6 15-14 15l-3 4" fill="none" stroke="#faf6ee" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <svg width="120" height="104" viewBox="0 0 120 100" style="overflow:visible;filter:drop-shadow(2px 3px 0 rgba(30,53,42,.5))">
+          <g class="idx-koel-bird">
+            <path d="M34 66 L10 88 Q24 92 40 78" fill="#2b2331" stroke="#fffdf7" stroke-width="3"></path>
+            <ellipse cx="56" cy="58" rx="26" ry="20" fill="#2b2331" stroke="#fffdf7" stroke-width="3"></ellipse>
+            <circle cx="78" cy="38" r="14" fill="#2b2331" stroke="#fffdf7" stroke-width="3"></circle>
+            <path d="M90 35 L103 40 L90 45 Z" fill="#e2603a" stroke="#fffdf7" stroke-width="2"></path>
+            <circle cx="82" cy="35" r="3.4" fill="#d63b2f"></circle><circle cx="83" cy="34" r="1.1" fill="#fff"></circle>
+            <path d="M42 54 Q56 44 68 54 Q58 68 42 62 Z" fill="#463a52"></path>
+          </g>
+        </svg>
+      </div>
+      <div style="padding:26px 28px 30px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:inline-flex;align-self:flex-start;background:#e2603a;color:#faf6ee;border-radius:999px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px">New</div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-size:21px;font-weight:800;letter-spacing:-.02em">koel coffee co.</span>
+          <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#3f5a4a">01</span>
+        </div>
+        <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#3f5a4a">Scrapbook craft · mascot-led · Bricolage + Caveat</div>
+        <div style="font-size:13.5px;line-height:1.7;color:#4a5f52"><strong style="font-weight:600">Ethos — warmth as craft.</strong> A family of coffee lovers from the Ghats, now roasting in Gurugram and curating Indian lots. A scrapbook of taped polaroids, stickers, and the koel bird.</div>
+        <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin-top:8px;border-bottom:1px solid #e2603a;color:#1e352a;align-self:flex-start;padding-bottom:3px">View direction →</div>
+      </div>
+    </a>
+
+    <!-- KANSO -->
+    <a href="Kanso.dc.html" class="dir-card" style="display:flex;flex-direction:column;background:#f7f5f0;color:#292521;min-height:420px" style-hover="transform:translateY(-4px);box-shadow:0 16px 44px rgba(0,0,0,.45)">
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:36px 0;border-bottom:1px solid #e2ddd3">
+        <svg width="120" height="130" viewBox="0 0 120 130" fill="none" stroke="#292521" stroke-width="1">
+          <circle cx="60" cy="70" r="42" stroke="#d8d2c6"></circle>
+          <ellipse cx="60" cy="70" rx="20" ry="30" transform="rotate(18 60 70)"></ellipse>
+          <path d="M53 44 C 65 58, 53 82, 67 96"></path>
+        </svg>
+      </div>
+      <div style="padding:26px 28px 30px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:24px;letter-spacing:.3em">KANSO</span>
+          <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8b8378">02</span>
+        </div>
+        <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#8b8378">Japandi calm · fine line-art · serif + sans</div>
+        <div style="font-size:13.5px;line-height:1.7;color:#5c554b"><strong style="font-weight:500">Ethos — omission as luxury.</strong> Say less, leave space, let one botanical line drawing and generous whitespace signal confidence. Premium through restraint.</div>
+        <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin-top:8px;border-bottom:1px solid #292521;align-self:flex-start;padding-bottom:3px">View direction →</div>
+      </div>
+    </a>
+
+    <!-- VESPER -->
+    <a href="Vesper.dc.html" class="dir-card" style="display:flex;flex-direction:column;background:#ede4d3;color:#2c2016;min-height:420px" style-hover="transform:translateY(-4px);box-shadow:0 16px 44px rgba(0,0,0,.45)">
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:36px 0;border-bottom:1px solid #c4b49a">
+        <div style="border:1px solid #2c2016;outline:1px solid #2c2016;outline-offset:4px;padding:26px 34px;display:flex;flex-direction:column;align-items:center;gap:8px;background:#f2ebdd">
+          <svg width="56" height="38" viewBox="0 0 88 60" fill="none" stroke="#2c2016" stroke-width="1.4">
+            <ellipse cx="30" cy="34" rx="12" ry="18" transform="rotate(-16 30 34)"></ellipse>
+            <path d="M26 19 C 33 27, 25 41, 34 49"></path>
+            <ellipse cx="58" cy="34" rx="12" ry="18" transform="rotate(16 58 34)"></ellipse>
+            <path d="M62 19 C 55 27, 63 41, 54 49"></path>
+          </svg>
+          <span style="font-family:'Libre Caslon Text',serif;font-size:13px;letter-spacing:.1em">VESPER CO.</span>
+        </div>
+      </div>
+      <div style="padding:26px 28px 30px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <span style="font-family:'Libre Caslon Text',serif;font-size:23px">VESPER CO.</span>
+          <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8a5a34">03</span>
+        </div>
+        <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#8a5a34">Warm &amp; earthy · engraved labels · caslon serif</div>
+        <div style="font-size:13.5px;line-height:1.7;color:#5a4a38"><strong style="font-weight:500">Ethos — provenance as theatre.</strong> Apothecary framing, lot numbers, a roast ledger. Heritage cues borrowed from wine merchants, applied with a straight face.</div>
+        <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin-top:8px;border-bottom:1px solid #2c2016;align-self:flex-start;padding-bottom:3px">View direction →</div>
+      </div>
+    </a>
+
+    <!-- FORM -->
+    <a href="Form.dc.html" class="dir-card" style="display:flex;flex-direction:column;background:#1b1512;color:#eae3d8;border:1px solid #38302a;min-height:420px" style-hover="transform:translateY(-4px);box-shadow:0 16px 44px rgba(0,0,0,.45)">
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:36px 0;border-bottom:1px solid #38302a">
+        <svg width="130" height="130" viewBox="0 0 420 420" fill="none">
+          <circle cx="210" cy="210" r="170" stroke="#38302a" stroke-width="4"></circle>
+          <path d="M210 40 A170 170 0 0 1 380 210" stroke="#c07a4e" stroke-width="10"></path>
+          <circle cx="210" cy="210" r="58" fill="#c07a4e"></circle>
+          <ellipse cx="210" cy="210" rx="26" ry="40" transform="rotate(20 210 210)" stroke="#1b1512" stroke-width="6" fill="none"></ellipse>
+        </svg>
+      </div>
+      <div style="padding:26px 28px 30px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <span style="font-family:'Archivo',sans-serif;font-size:23px;font-weight:600">FORM<span style="color:#c07a4e">.</span></span>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:#7a6a5c">04</span>
+        </div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#a89886">Dark espresso · geometric · Swiss sans + mono</div>
+        <div style="font-size:13.5px;line-height:1.7;color:#a89886"><strong style="font-weight:500;color:#eae3d8">Ethos — precision as identity.</strong> Roast curves, agtron scores, published recipes. Luxury for people who own a 0.1 g scale and use it.</div>
+        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:8px;border-bottom:1px solid #c07a4e;align-self:flex-start;padding-bottom:3px;color:#c07a4e">View direction →</div>
+      </div>
+    </a>
+
+    <!-- VOLT -->
+    <a href="Volt.dc.html" class="dir-card" style="display:flex;flex-direction:column;background:#0a0a0f;color:#f2f2ef;border:1px solid #26262e;min-height:420px" style-hover="transform:translateY(-4px);box-shadow:0 16px 44px rgba(0,0,0,.45)">
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:36px 0;border-bottom:1px solid #26262e;position:relative;overflow:hidden">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%, rgba(204,255,0,.12), transparent 65%)"></div>
+        <img src="uploads/pasted-1783453498165-0.webp" alt="VOLT protein cold brew sachet" style="position:relative;max-height:210px;max-width:72%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 0 22px rgba(255,46,196,.55)) drop-shadow(0 0 60px rgba(255,46,196,.22))">
+      </div>
+      <div style="padding:26px 28px 30px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <span style="font-family:'Unbounded',sans-serif;font-size:20px;font-weight:800">VOLT<span style="color:#ccff00">//</span></span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8f8f9c">05</span>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8f8f9c">Cyberpunk · Gen Z · protein + double shots</div>
+        <div style="font-size:13.5px;line-height:1.7;color:#b9b9c4"><strong style="font-weight:500;color:#f2f2ef">Ethos — energy with receipts.</strong> Neon, motion, meme-literate copy — but specialty beans, real macros, and batch tests behind every claim. Loud outside, serious inside.</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:8px;border-bottom:1px solid #ccff00;align-self:flex-start;padding-bottom:3px;color:#ccff00">View direction →</div>
+      </div>
+    </a>
+
+    <!-- CEMNT -->
+    <a href="Cemnt.dc.html" class="dir-card" style="display:flex;flex-direction:column;background:#1e1e22;color:#e8e6e1;border:1px solid #33333a;min-height:420px" style-hover="transform:translateY(-4px);box-shadow:0 16px 44px rgba(0,0,0,.45)">
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:36px 0;border-bottom:1px solid #33333a;position:relative;overflow:hidden">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%, rgba(255,83,19,.10), transparent 65%)"></div>
+        <svg width="120" height="130" viewBox="0 0 120 130" fill="none" stroke="#f5c400" stroke-width="2">
+          <path d="M60 12 L106 100 L14 100 Z"></path>
+          <line x1="60" y1="42" x2="60" y2="76" stroke="#ff5313"></line>
+          <circle cx="60" cy="88" r="2.6" fill="#ff5313" stroke="none"></circle>
+        </svg>
+      </div>
+      <div style="padding:26px 28px 30px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <span style="font-family:'Unbounded',sans-serif;font-size:19px;font-weight:800;letter-spacing:.03em">CEMNT</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8f8f9c">06</span>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#a7abb2">Hard industrial · brutalist · extreme motion</div>
+        <div style="font-size:13.5px;line-height:1.7;color:#a7abb2"><strong style="font-weight:500;color:#e8e6e1">Ethos — precision as brute force.</strong> Coffee framed as a poured, load-rated building material — batch tickets, cure windows, and PSI ratings standing in for tasting notes.</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:8px;border-bottom:1px solid #ff5313;align-self:flex-start;padding-bottom:3px;color:#ff5313">View direction →</div>
+      </div>
+    </a>
+
+    <!-- SI SAV -->
+    <a href="Sisav.dc.html" class="dir-card" style="display:flex;flex-direction:column;background:#f4efe6;color:#3a352d;min-height:420px" style-hover="transform:translateY(-4px);box-shadow:0 16px 44px rgba(0,0,0,.45)">
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:36px 0;border-bottom:1px solid #e3d9c6;position:relative;overflow:hidden">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 50% 45%, rgba(176,137,104,.12), transparent 65%)"></div>
+        <svg width="118" height="128" viewBox="0 0 118 128" fill="none" style="position:relative">
+          <g stroke="#7d6a58" stroke-width="1.3" fill="none">
+            <path d="M59 40 C 70 58, 70 84, 59 98 C 48 84, 48 58, 59 40 Z"></path>
+            <path d="M59 52 C 63 66, 63 82, 59 92"></path>
+            <path d="M59 96 C 40 86, 30 70, 30 54 C 44 60, 54 74, 59 96 Z"></path>
+            <path d="M59 96 C 78 86, 88 70, 88 54 C 74 60, 64 74, 59 96 Z"></path>
+            <path d="M59 98 C 34 96, 20 84, 16 70 C 32 72, 48 82, 59 98 Z" stroke="#b08968"></path>
+            <path d="M59 98 C 84 96, 98 84, 102 70 C 86 72, 70 82, 59 98 Z" stroke="#b08968"></path>
+            <line x1="20" y1="106" x2="98" y2="106" stroke="#9aa38a"></line>
+            <circle cx="59" cy="24" r="5" stroke="#c9a24b"></circle>
+            <line x1="59" y1="7" x2="59" y2="13" stroke="#c9a24b"></line>
+            <line x1="44" y1="13" x2="48" y2="17" stroke="#c9a24b"></line>
+            <line x1="74" y1="13" x2="70" y2="17" stroke="#c9a24b"></line>
+          </g>
+        </svg>
+      </div>
+      <div style="padding:26px 28px 30px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:24px;letter-spacing:.14em">SI SAV</span>
+          <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9a8a72">07</span>
+        </div>
+        <div style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#9a8a72">Traditional Indian · handcrafted folk art · jute</div>
+        <div style="font-size:13.5px;line-height:1.7;color:#6b6355"><strong style="font-weight:500">Ethos — heritage as ritual.</strong> South Asian coffee tradition told through hand-drawn Madhubani line-art, jute and handmade paper, muted natural dyes, and crystals as a quiet ritual accent.</div>
+        <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin-top:8px;border-bottom:1px solid #b08968;align-self:flex-start;padding-bottom:3px;color:#8a5a34">View direction →</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- footer -->
+  <div style="border-top:1px solid #2a2622;padding:28px clamp(20px,5vw,64px);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:#9a8d7c;max-width:1100px;margin:0 auto;box-sizing:border-box">
+    <span>Direction studies · v1</span>
+    <span>Pick one, mix two, or push further</span>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const start = () => {
+      if (!window.anime) { setTimeout(start, 120); return; }
+      const anime = window.anime;
+      const root = document.querySelector('[data-screen-label]');
+      if (!root || root.dataset.animated) return;
+      root.dataset.animated = '1';
+      const header = root.children[0];
+      if (header) {
+        header.style.opacity = 0;
+        anime({ targets: header, opacity: [0, 1], translateY: [14, 0], duration: 900, easing: 'easeOutCubic' });
+      }
+      const cards = root.querySelectorAll('a[href$=".dc.html"]');
+      cards.forEach((card) => { card.style.opacity = 0; });
+      anime({ targets: cards, opacity: [0, 1], translateY: [24, 0], duration: 800, delay: anime.stagger(140, { start: 250 }), easing: 'easeOutCubic' });
+      root.querySelectorAll('a svg').forEach((s, i) => {
+        s.querySelectorAll('path,circle,ellipse').forEach((el, j) => {
+          if (el.getAttribute('fill') && el.getAttribute('fill') !== 'none') return;
+          try {
+            const l = el.getTotalLength();
+            if (!l) return;
+            el.style.strokeDasharray = l;
+            el.style.strokeDashoffset = l;
+            anime({ targets: el, strokeDashoffset: [l, 0], duration: 1400, delay: 500 + i * 200 + j * 120, easing: 'easeInOutSine' });
+          } catch (e) {}
+        });
+      });
+    };
+    start();
+  }
+}
+</script>
+</body>
+</html>

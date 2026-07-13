@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#1b1512}
+a{color:inherit;text-decoration:none}
+a:hover{opacity:.7}
+
+/* precision cursor / reticle */
+.fx-cursor{position:fixed;top:0;left:0;width:22px;height:22px;border:1px solid rgba(234,227,216,.5);border-radius:50%;pointer-events:none;z-index:9999;transform:translate3d(-999px,-999px,0);transition:width .2s cubic-bezier(.22,1,.36,1),height .2s cubic-bezier(.22,1,.36,1),border-color .2s ease,background-color .2s ease;will-change:transform}
+.fx-cursor::before,.fx-cursor::after{content:'';position:absolute;top:50%;width:6px;height:1px;background:#c07a4e;opacity:0;transition:opacity .2s ease}
+.fx-cursor::before{left:-10px}
+.fx-cursor::after{right:-10px}
+.fx-cursor.is-active{width:40px;height:40px;border-color:#c07a4e;background:rgba(192,122,78,.08)}
+.fx-cursor.is-active::before,.fx-cursor.is-active::after{opacity:.85}
+.fx-cursor-dot{position:fixed;top:0;left:0;width:3px;height:3px;border-radius:50%;background:#c07a4e;pointer-events:none;z-index:9999;transform:translate3d(-999px,-999px,0);will-change:transform;transition:opacity .2s ease}
+.fx-cursor-dot.is-active{opacity:0}
+
+/* lineup rows / method spec rows / index rows */
+.fx-row,.fx-spec{position:relative;transition:background-color .22s ease}
+.fx-row{background-color:#1b1512}
+.fx-row::before,.fx-spec::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#c07a4e;transform:scaleY(0);transform-origin:center;transition:transform .22s cubic-bezier(.22,1,.36,1)}
+.fx-price{transition:color .18s ease}
+
+/* ADD + buttons */
+.fx-add{transition:background-color .18s ease,color .18s ease,border-color .18s ease;will-change:transform}
+
+/* object image tiles */
+.fx-obj-img{transition:transform .45s cubic-bezier(.22,1,.36,1),filter .45s ease;filter:grayscale(.35) saturate(.7)}
+.fx-obj-label{transition:transform .22s ease}
+
+/* nav underline */
+.fx-nav-item{position:relative;padding-bottom:3px;transition:color .18s ease}
+.fx-nav-item::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:#c07a4e;transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.22,1,.36,1)}
+
+@media (hover:hover) and (pointer:fine){
+  .fx-row:hover,.fx-spec:hover{background-color:rgba(192,122,78,.05)}
+  .fx-row:hover::before,.fx-spec:hover::before{transform:scaleY(1)}
+  .fx-row:hover .fx-price,.fx-spec:hover .fx-price{color:#c07a4e}
+  .fx-add:hover{background:#eae3d8;color:#1b1512;border-color:#eae3d8}
+  .fx-obj-wrap:hover .fx-obj-img{transform:scale(1.03);filter:grayscale(0) saturate(1.15)}
+  .fx-obj-wrap:hover .fx-obj-label{transform:translateX(4px)}
+  .fx-nav-item:hover::after{transform:scaleX(1)}
+  .fx-nav-item:hover{color:#eae3d8}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .fx-cursor,.fx-cursor-dot,.fx-row,.fx-row::before,.fx-spec,.fx-spec::before,.fx-price,.fx-add,.fx-obj-img,.fx-obj-label,.fx-nav-item,.fx-nav-item::after{transition:none!important;animation:none!important}
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+</helmet>
+
+<div data-screen-label="FORM" style="background:#1b1512;color:#eae3d8;font-family:'Archivo',sans-serif;font-weight:300;min-height:100vh">
+
+  <a href="Index.dc.html" style="display:block;background:#c07a4e;color:#1b1512;text-align:center;padding:9px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:500">← Back to all directions</a>
+
+  <!-- nav -->
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:clamp(18px,3vw,26px) clamp(20px,4.5vw,56px);border-bottom:1px solid #38302a">
+    <div style="font-size:21px;font-weight:600;letter-spacing:.04em">FORM<span style="color:#c07a4e">.</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,40px);font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#a89886">
+      <span class="fx-nav-item">01 Coffee</span><span class="fx-nav-item">02 Objects</span><span class="fx-nav-item">03 Method</span><span class="fx-nav-item">04 Index</span>
+    </div>
+    <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.1em">CART [0]</div>
+  </div>
+
+  <!-- hero -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));border-bottom:1px solid #38302a">
+    <div style="padding:clamp(48px,8vw,96px) clamp(20px,4.5vw,56px);display:flex;flex-direction:column;gap:clamp(20px,3vw,30px);justify-content:center;border-right:1px solid #38302a">
+      <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:#c07a4e">EXTRACTION IS A SCIENCE. TASTE IS NOT.</div>
+      <div style="font-size:clamp(40px,5.5vw,74px);line-height:1.02;font-weight:500;letter-spacing:-.02em;text-wrap:balance">Precision-roasted coffee for people who measure.</div>
+      <div style="font-size:15px;line-height:1.75;color:#a89886;max-width:420px">Every bag ships with its roast curve, agtron score, and a brew recipe tested across 40 extractions. You bring the scale.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:6px">
+        <span class="fx-interactive" style="padding:16px 34px;background:#eae3d8;color:#1b1512;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;cursor:pointer">Shop coffee</span>
+        <span class="fx-interactive" style="padding:16px 34px;border:1px solid #56493f;font-size:12px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">The method</span>
+      </div>
+    </div>
+    <div data-hero-wrap style="position:relative;display:flex;align-items:center;justify-content:center;padding:clamp(32px,5vw,60px);background:#211a15;overflow:hidden;min-height:340px">
+      <svg width="100%" viewBox="0 0 420 420" fill="none" style="max-width:420px;height:auto;aspect-ratio:1/1">
+        <circle class="fx-p1" cx="210" cy="210" r="170" stroke="#38302a" stroke-width="1"></circle>
+        <circle class="fx-p2" cx="210" cy="210" r="120" stroke="#56493f" stroke-width="1"></circle>
+        <path class="fx-p3" d="M210 40 A170 170 0 0 1 380 210" stroke="#c07a4e" stroke-width="3"></path>
+        <circle class="fx-p4" cx="210" cy="210" r="58" fill="#c07a4e"></circle>
+        <ellipse class="fx-p4" cx="210" cy="210" rx="26" ry="40" transform="rotate(20 210 210)" stroke="#1b1512" stroke-width="2" fill="none"></ellipse>
+        <path class="fx-p4" d="M200 176 C 216 194, 200 226, 220 244" stroke="#1b1512" stroke-width="2"></path>
+        <rect class="fx-p1" x="330" y="330" width="52" height="52" stroke="#56493f" stroke-width="1" transform="rotate(45 356 356)"></rect>
+        <line class="fx-p1" x1="392.8" y1="356" x2="399" y2="356" stroke="#56493f" stroke-width="1"></line>
+        <text class="fx-p1" x="401" y="358.5" font-family="'Space Mono', monospace" font-size="7.5" letter-spacing="0.08em" fill="#98866f">CAL</text>
+      </svg>
+      <div style="position:absolute;bottom:24px;left:24px;font-family:'Space Mono',monospace;font-size:10.5px;color:#98866f;letter-spacing:.1em">FIG. 01 — ROAST CURVE, 11:42 TOTAL / FC 9:58</div>
+    </div>
+  </div>
+
+  <!-- lineup -->
+  <div style="border-bottom:1px solid #38302a">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px;padding:clamp(36px,5vw,56px) clamp(20px,4.5vw,56px) 32px">
+      <div style="font-size:clamp(26px,3vw,34px);font-weight:500;letter-spacing:-.01em">Current lineup</div>
+      <div style="font-family:'Space Mono',monospace;font-size:11.5px;color:#a89886;letter-spacing:.1em">03 LOTS IN ROTATION →</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:#38302a;border-top:1px solid #38302a;border-bottom:1px solid #38302a;margin:0 clamp(20px,4.5vw,56px) clamp(40px,5vw,64px)">
+      <div class="fx-row" style="padding:30px 26px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'Space Mono',monospace;color:#c07a4e;font-size:12px">N°1</span><span class="fx-price" style="font-family:'Space Mono',monospace;font-size:14px">₹1,050</span></div>
+        <div style="font-weight:500;font-size:19px">Gesha Village — Ethiopia</div>
+        <div style="color:#a89886;font-family:'Space Mono',monospace;font-size:11.5px;line-height:1.8">WASHED · 1,950 M · AGTRON 78</div>
+        <div style="color:#a89886;font-size:14px">bergamot · white peach · silk</div>
+        <span class="fx-add" style="border:1px solid #56493f;padding:10px 20px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;align-self:flex-start;margin-top:auto;cursor:pointer">ADD +</span>
+      </div>
+      <div class="fx-row" style="padding:30px 26px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'Space Mono',monospace;color:#c07a4e;font-size:12px">N°2</span><span class="fx-price" style="font-family:'Space Mono',monospace;font-size:14px">₹1,200</span></div>
+        <div style="font-weight:500;font-size:19px">Finca Deborah — Panama</div>
+        <div style="color:#a89886;font-family:'Space Mono',monospace;font-size:11.5px;line-height:1.8">CARBONIC · 1,900 M · AGTRON 82</div>
+        <div style="color:#a89886;font-size:14px">papaya · jasmine · lime zest</div>
+        <span class="fx-add" style="border:1px solid #56493f;padding:10px 20px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;align-self:flex-start;margin-top:auto;cursor:pointer">ADD +</span>
+      </div>
+      <div class="fx-row" style="padding:30px 26px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-family:'Space Mono',monospace;color:#c07a4e;font-size:12px">N°3</span><span class="fx-price" style="font-family:'Space Mono',monospace;font-size:14px">₹1,100</span></div>
+        <div style="font-weight:500;font-size:19px">Cerro Azul — Colombia</div>
+        <div style="color:#a89886;font-family:'Space Mono',monospace;font-size:11.5px;line-height:1.8">THERMAL SHOCK · 1,700 M · AGTRON 75</div>
+        <div style="color:#a89886;font-size:14px">lychee · rose · cane sugar</div>
+        <span class="fx-add" style="border:1px solid #56493f;padding:10px 20px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;align-self:flex-start;margin-top:auto;cursor:pointer">ADD +</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- method -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));border-bottom:1px solid #38302a">
+    <div style="padding:clamp(44px,6vw,80px) clamp(20px,4.5vw,56px);display:flex;flex-direction:column;gap:26px;justify-content:center">
+      <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:#c07a4e">03 — METHOD</div>
+      <div style="font-size:clamp(30px,4vw,44px);line-height:1.08;font-weight:500;letter-spacing:-.015em">40 extractions before we publish one recipe.</div>
+      <div style="display:flex;flex-direction:column;margin-top:8px">
+        <div class="fx-spec" style="display:flex;justify-content:space-between;border-top:1px solid #38302a;padding:14px 0;font-size:14px"><span style="color:#a89886">Dose</span><span class="fx-price" style="font-family:'Space Mono',monospace;font-size:13px">18.0 g ± 0.1</span></div>
+        <div class="fx-spec" style="display:flex;justify-content:space-between;border-top:1px solid #38302a;padding:14px 0;font-size:14px"><span style="color:#a89886">Ratio</span><span class="fx-price" style="font-family:'Space Mono',monospace;font-size:13px">1 : 16.5</span></div>
+        <div class="fx-spec" style="display:flex;justify-content:space-between;border-top:1px solid #38302a;padding:14px 0;font-size:14px"><span style="color:#a89886">Water</span><span class="fx-price" style="font-family:'Space Mono',monospace;font-size:13px">93 °C · 80 PPM</span></div>
+        <div class="fx-spec" style="display:flex;justify-content:space-between;border-top:1px solid #38302a;border-bottom:1px solid #38302a;padding:14px 0;font-size:14px"><span style="color:#a89886">Target TDS</span><span class="fx-price" style="font-family:'Space Mono',monospace;font-size:13px">1.38 – 1.42%</span></div>
+      </div>
+    </div>
+    <div style="position:relative;min-height:340px">
+      <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1100&q=80" alt="Pour over brewing" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.7) contrast(1.05)">
+      <div style="position:absolute;top:32px;right:32px;width:88px;height:88px;border-radius:50%;background:#c07a4e;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10.5px;color:#1b1512;text-align:center;line-height:1.4">FIG.02<br>BLOOM</div>
+    </div>
+  </div>
+
+  <!-- objects -->
+  <div style="padding:clamp(44px,6vw,72px) clamp(20px,4.5vw,56px);border-bottom:1px solid #38302a;display:flex;flex-direction:column;gap:clamp(28px,4vw,40px)">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px">
+      <div style="font-size:clamp(26px,3vw,34px);font-weight:500">Objects</div>
+      <div style="font-family:'Space Mono',monospace;font-size:11.5px;color:#a89886;letter-spacing:.1em">02 — TOOLS THAT EARN THEIR COUNTER SPACE →</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="fx-obj-wrap" style="position:relative;overflow:hidden"><img class="fx-obj-img" src="https://images.unsplash.com/photo-1524350876685-274059332603?auto=format&fit=crop&w=800&q=80" alt="Kettle" style="width:100%;height:300px;object-fit:cover;display:block"><div class="fx-obj-label" style="position:absolute;top:14px;left:14px;font-family:'Space Mono',monospace;font-size:10.5px;background:#1b1512;padding:5px 10px;letter-spacing:.1em">OBJ-01</div></div>
+        <div style="display:flex;justify-content:space-between;gap:12px;font-size:14.5px"><span style="font-weight:500">Variable-temp kettle</span><span style="font-family:'Space Mono',monospace;font-size:13px;color:#c07a4e">₹4,700</span></div>
+        <div style="font-size:12.5px;color:#98866f;font-family:'Space Mono',monospace">±0.5 °C HOLD · 900 ML</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="fx-obj-wrap" style="position:relative;overflow:hidden"><img class="fx-obj-img" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80" alt="Cup" style="width:100%;height:300px;object-fit:cover;display:block"><div class="fx-obj-label" style="position:absolute;top:14px;left:14px;font-family:'Space Mono',monospace;font-size:10.5px;background:#1b1512;padding:5px 10px;letter-spacing:.1em">OBJ-02</div></div>
+        <div style="display:flex;justify-content:space-between;gap:12px;font-size:14.5px"><span style="font-weight:500">Double-wall cup, pair</span><span style="font-family:'Space Mono',monospace;font-size:13px;color:#c07a4e">₹1,900</span></div>
+        <div style="font-size:12.5px;color:#98866f;font-family:'Space Mono',monospace">BOROSILICATE · 220 ML</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="fx-obj-wrap" style="position:relative;overflow:hidden"><img class="fx-obj-img" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80" alt="Coffee top-down" style="width:100%;height:300px;object-fit:cover;display:block"><div class="fx-obj-label" style="position:absolute;top:14px;left:14px;font-family:'Space Mono',monospace;font-size:10.5px;background:#1b1512;padding:5px 10px;letter-spacing:.1em">OBJ-03</div></div>
+        <div style="display:flex;justify-content:space-between;gap:12px;font-size:14.5px"><span style="font-weight:500">Brew scale, 0.1 g</span><span style="font-family:'Space Mono',monospace;font-size:13px;color:#c07a4e">₹2,900</span></div>
+        <div style="font-size:12.5px;color:#98866f;font-family:'Space Mono',monospace">AUTO-TIMER · USB-C</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- rotation + index -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));border-bottom:1px solid #38302a">
+    <div style="padding:clamp(44px,6vw,72px) clamp(20px,4.5vw,56px);border-right:1px solid #38302a;display:flex;flex-direction:column;gap:22px;justify-content:center">
+      <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:#c07a4e">THE ROTATION</div>
+      <div style="font-size:clamp(28px,3.5vw,40px);line-height:1.1;font-weight:500;letter-spacing:-.015em">A new variable,<br>every two weeks.</div>
+      <div style="font-size:14.5px;line-height:1.75;color:#a89886;max-width:400px">Subscribers get each lot 10 days before general release, plus the full roast data sheet. From ₹1,600 per shipment. Cancel whenever.</div>
+      <span class="fx-interactive" style="padding:16px 34px;background:#c07a4e;color:#1b1512;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;align-self:flex-start;margin-top:4px;cursor:pointer">Join the rotation</span>
+    </div>
+    <div style="padding:clamp(44px,6vw,72px) clamp(20px,4.5vw,56px);display:flex;flex-direction:column;justify-content:center">
+      <div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:#c07a4e;padding-bottom:20px">04 — INDEX</div>
+      <div class="fx-spec" style="border-top:1px solid #38302a;padding:18px 0;display:flex;justify-content:space-between;gap:20px;align-items:baseline"><span style="font-size:17px;font-weight:500">Reading a roast curve, properly</span><span class="fx-price" style="font-family:'Space Mono',monospace;font-size:11px;color:#98866f">IDX-09</span></div>
+      <div class="fx-spec" style="border-top:1px solid #38302a;padding:18px 0;display:flex;justify-content:space-between;gap:20px;align-items:baseline"><span style="font-size:17px;font-weight:500">Water chemistry: the 80 PPM argument</span><span class="fx-price" style="font-family:'Space Mono',monospace;font-size:11px;color:#98866f">IDX-08</span></div>
+      <div class="fx-spec" style="border-top:1px solid #38302a;border-bottom:1px solid #38302a;padding:18px 0;display:flex;justify-content:space-between;gap:20px;align-items:baseline"><span style="font-size:17px;font-weight:500">Why we publish our green prices</span><span class="fx-price" style="font-family:'Space Mono',monospace;font-size:11px;color:#98866f">IDX-07</span></div>
+    </div>
+  </div>
+
+  <!-- press + footer -->
+  <div style="padding:32px clamp(20px,4.5vw,56px);display:flex;justify-content:center;gap:clamp(24px,4vw,52px);border-bottom:1px solid #38302a;font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.18em;color:#98866f;flex-wrap:wrap">
+    <span>WIRED</span><span>MONOCLE</span><span>SPRUDGE</span><span>DEZEEN</span><span>STANDART</span>
+  </div>
+  <div style="padding:clamp(24px,4vw,36px) clamp(20px,4.5vw,56px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;font-family:'Space Mono',monospace;font-size:11px;color:#98866f;letter-spacing:.1em">
+    <span style="font-family:'Archivo',sans-serif;font-size:16px;font-weight:600;color:#eae3d8">FORM<span style="color:#c07a4e">.</span></span>
+    <span>SHIPPING / WHOLESALE / CONTACT</span>
+    <span>© 2026 — ROASTED AT 47.61° N</span>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const start = () => {
+      if (!window.anime) { setTimeout(start, 120); return; }
+      const anime = window.anime;
+      const root = document.querySelector('[data-screen-label]');
+      if (!root || root.dataset.animated) return;
+      root.dataset.animated = '1';
+      const hero = root.querySelector('svg');
+      if (hero) {
+        hero.querySelectorAll('path,circle,ellipse,line,rect').forEach((el, i) => {
+          if (el.getAttribute('fill') && el.getAttribute('fill') !== 'none') return;
+          try {
+            const l = el.getTotalLength();
+            if (!l) return;
+            el.style.strokeDasharray = l;
+            el.style.strokeDashoffset = l;
+            anime({ targets: el, strokeDashoffset: [l, 0], duration: 1600, delay: 250 + i * 150, easing: 'easeInOutSine' });
+          } catch (e) {}
+        });
+        anime({ targets: hero, rotate: [0, 360], duration: 240000, loop: true, easing: 'linear' });
+      }
+      const fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+      // --- precision cursor / reticle (desktop only) ---
+      if (fine) {
+        const cursor = document.createElement('div');
+        cursor.className = 'fx-cursor';
+        const dot = document.createElement('div');
+        dot.className = 'fx-cursor-dot';
+        document.body.appendChild(cursor);
+        document.body.appendChild(dot);
+        let mx = -999, my = -999, cx = -999, cy = -999;
+        const renderCursor = () => {
+          cx += (mx - cx) * 0.35;
+          cy += (my - cy) * 0.35;
+          cursor.style.transform = 'translate3d(' + (cx - 11) + 'px,' + (cy - 11) + 'px,0)';
+          dot.style.transform = 'translate3d(' + (mx - 1.5) + 'px,' + (my - 1.5) + 'px,0)';
+          requestAnimationFrame(renderCursor);
+        };
+        window.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; }, { passive: true });
+        requestAnimationFrame(renderCursor);
+        const interactiveSel = '.fx-row,.fx-spec,.fx-add,.fx-nav-item,.fx-interactive,a';
+        document.addEventListener('mouseover', (e) => {
+          if (e.target.closest && e.target.closest(interactiveSel)) {
+            cursor.classList.add('is-active');
+            dot.classList.add('is-active');
+          }
+        }, { passive: true });
+        document.addEventListener('mouseout', (e) => {
+          const toEl = e.relatedTarget;
+          const stillInside = toEl && toEl.closest && toEl.closest(interactiveSel);
+          if (e.target.closest && e.target.closest(interactiveSel) && !stillInside) {
+            cursor.classList.remove('is-active');
+            dot.classList.remove('is-active');
+          }
+        }, { passive: true });
+      }
+
+      // --- magnetic ADD + buttons ---
+      if (fine) {
+        root.querySelectorAll('.fx-add').forEach((btn) => {
+          let queued = false;
+          btn.addEventListener('mousemove', (e) => {
+            if (queued) return;
+            queued = true;
+            requestAnimationFrame(() => {
+              const r = btn.getBoundingClientRect();
+              const dx = Math.max(-6, Math.min(6, ((e.clientX - r.left) / r.width - 0.5) * 12));
+              const dy = Math.max(-6, Math.min(6, ((e.clientY - r.top) / r.height - 0.5) * 12));
+              btn.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+              queued = false;
+            });
+          }, { passive: true });
+          btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0,0)'; }, { passive: true });
+        });
+      }
+
+      // --- hero roast-dial layered mouse-parallax ---
+      if (fine && hero) {
+        const heroWrap = root.querySelector('[data-hero-wrap]');
+        const layers = [
+          { els: hero.querySelectorAll('.fx-p1'), depth: 4 },
+          { els: hero.querySelectorAll('.fx-p2'), depth: 8 },
+          { els: hero.querySelectorAll('.fx-p3'), depth: 12 },
+          { els: hero.querySelectorAll('.fx-p4'), depth: 18 }
+        ];
+        let px = 0, py = 0, queuedP = false;
+        const renderParallax = () => {
+          layers.forEach(({ els, depth }) => {
+            els.forEach((el) => { el.style.transform = 'translate(' + (px * depth) + 'px,' + (py * depth) + 'px)'; });
+          });
+          queuedP = false;
+        };
+        window.addEventListener('mousemove', (e) => {
+          if (!heroWrap) return;
+          const r = heroWrap.getBoundingClientRect();
+          px = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2));
+          py = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - 0.5) * 2));
+          if (!queuedP) { queuedP = true; requestAnimationFrame(renderParallax); }
+        }, { passive: true });
+      }
+
+      const pending = [];
+      Array.from(root.children).forEach((el) => {
+        if (el.tagName === 'SCRIPT' || el.tagName === 'A') return;
+        if (el.getBoundingClientRect().top < window.innerHeight * 1.1) return;
+        el.style.opacity = 0;
+        pending.push(el);
+      });
+      const check = () => {
+        for (let i = pending.length - 1; i >= 0; i--) {
+          const el = pending[i];
+          if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
+            pending.splice(i, 1);
+            anime({ targets: el, opacity: [0, 1], translateY: [16, 0], duration: 850, easing: 'easeOutCubic' });
+          }
+        }
+        if (!pending.length) {
+          window.removeEventListener('scroll', onScroll, true);
+          clearInterval(this._pollId);
+        }
+      };
+      const onScroll = () => window.requestAnimationFrame(check);
+      window.addEventListener('scroll', onScroll, { passive: true, capture: true });
+      this._pollId = setInterval(check, 700);
+      check();
+    };
+    start();
+  }
+}
+</script>
+</body>
+</html>

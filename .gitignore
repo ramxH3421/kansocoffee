@@ -1,0 +1,7 @@
+# qa/ is regenerable Playwright QA screenshots, not source
+qa/
+# unreferenced by any .dc.html
+image.png
+*.log
+.DS_Store
+__pycache__/
