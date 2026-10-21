@@ -1,0 +1,6 @@
+both secret-regex = .github/workflows/keyscan.yml :: secret-regex
+na lint = static HTML mocks, no build or lint step
+na typecheck = no TypeScript
+na unit = no tests
+na build = no build step
+na shell-py = no first-party shell or python project
