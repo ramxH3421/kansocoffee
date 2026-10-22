@@ -1,0 +1,35 @@
+name: keyscan
+
+# Light secret scan of tracked files. Runs on a GitHub-hosted runner (free on public repos).
+# Prints file:line only, never the matched value. No secrets, no publish.
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: keyscan-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  secret-regex:
+    name: secret-regex
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Secret regex scan (tracked files; prints file:line only, never the value)
+        run: |
+          set +e
+          hits=$(git grep -InE -e '-----BEGIN [A-Z ]*PRIVATE KEY-----' -e '(ghp_|gho_|github_pat_|glpat-|xox[abprs]-)[A-Za-z0-9_-]{30,}' -e 'AKIA[0-9A-Z]{16}' -e 'AIza[0-9A-Za-z_-]{35}' -e '(sk_live_|rk_live_)[A-Za-z0-9]{16,}' -- .)
+          rc=$?
+          # git grep: 0 = matches (fail), 1 = none (pass), anything else = scan error (fail)
+          if [ "$rc" -eq 0 ]; then echo "Possible secrets at:"; echo "$hits" | cut -d: -f1,2; exit 1; fi
+          if [ "$rc" -ne 1 ]; then echo "secret scan errored (rc=$rc)"; exit 1; fi
+          echo "secret-regex clean"
